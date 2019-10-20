@@ -103,10 +103,10 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         event.target = this.textAreaRef;
         event.currentTarget = this.textAreaRef;
         const originalInputValue = this.textAreaRef.value;
-        // change input value cause e.target.value should be '' when clear input
+        // change textarea value cause e.target.value should be '' when clear input
         this.textAreaRef.value = '';
         onChange(event as React.ChangeEvent<HTMLTextAreaElement>);
-        // reset input value
+        // reset textarea value
         this.textAreaRef.value = originalInputValue;
         return;
       }
