@@ -63,4 +63,27 @@
   }
 }
 
+.@{ant-prefix}-input-textarea-clear-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 2px;
+  color: @disabled-color;
+  font-size: @font-size-sm;
+  cursor: pointer;
+  transition: color 0.3s;
+
+  &:hover {
+    color: @text-color-secondary;
+  }
+
+  &:active {
+    color: @text-color;
+  }
+
+  + i {
+    margin-left: 6px;
+  }
+}
+
 @import './search-input';
