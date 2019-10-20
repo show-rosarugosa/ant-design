@@ -8,6 +8,7 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import raf from '../_util/raf';
 import warning from '../_util/warning';
 import Icon from '../icon';
+import { InputProps } from './Input';
 
 function fixControlledValue<T>(value: T) {
   if (typeof value === 'undefined' || value === null) {
@@ -36,7 +37,7 @@ export interface TextAreaState {
   textareaStyles?: React.CSSProperties;
   /** We need add process style to disable scroll first and then add back to avoid unexpected scrollbar  */
   resizing?: boolean;
-  value?: string | string[] | number;
+  value?: any;
 }
 
 class TextArea extends React.Component<TextAreaProps, TextAreaState> {
@@ -52,6 +53,15 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
       resizing: false,
       value,
     };
+  }
+
+  static getDerivedStateFromProps(nextProps: InputProps) {
+    if ('value' in nextProps) {
+      return {
+        value: nextProps.value,
+      };
+    }
+    return null;
   }
 
   private textAreaRef: HTMLTextAreaElement;
@@ -76,17 +86,38 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     this.textAreaRef = textArea;
   };
 
-  handleTextareaChange = (
+  setValue(
+    value: string,
     e: React.ChangeEvent<HTMLTextAreaElement> | React.MouseEvent<HTMLElement, MouseEvent>,
-  ) => {
+    callback?: () => void,
+  ) {
     if (!('value' in this.props)) {
-      this.resizeTextarea();
-      this.setState({ value: (e as React.ChangeEvent<HTMLTextAreaElement>).target.value });
+      this.setState({ value }, callback);
     }
     const { onChange } = this.props;
     if (onChange) {
-      onChange(e as React.ChangeEvent<HTMLTextAreaElement>);
+      let event = e;
+      if (e.type === 'click') {
+        // click clear icon
+        event = Object.create(e);
+        event.target = this.textAreaRef;
+        event.currentTarget = this.textAreaRef;
+        const originalInputValue = this.textAreaRef.value;
+        // change input value cause e.target.value should be '' when clear input
+        this.textAreaRef.value = '';
+        onChange(event as React.ChangeEvent<HTMLTextAreaElement>);
+        // reset input value
+        this.textAreaRef.value = originalInputValue;
+        return;
+      }
+      onChange(event as React.ChangeEvent<HTMLTextAreaElement>);
     }
+  }
+
+  handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    this.setValue(e.target.value, e, () => {
+      this.resizeTextarea();
+    });
   };
 
   handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -128,19 +159,10 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
   }
 
   handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    if (!('value' in this.props)) {
-      this.setState({ value: '' }, this.focus);
-    }
-    // click clear icon
-    const event = Object.create(e);
-    event.target = this.textAreaRef;
-    event.currentTarget = this.textAreaRef;
-    const originalInputValue = this.textAreaRef.value;
-    // change textarea value cause e.target.value should be '' when clear input
-    this.textAreaRef.value = '';
-    this.handleTextareaChange(event);
-    // reset textarea value
-    this.textAreaRef.value = originalInputValue;
+    this.setValue('', e, () => {
+      this.resizeTextarea();
+      this.focus();
+    });
   };
 
   renderClearIcon(prefixCls: string) {
