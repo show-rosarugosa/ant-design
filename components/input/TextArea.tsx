@@ -9,13 +9,7 @@ import raf from '../_util/raf';
 import warning from '../_util/warning';
 import Icon from '../icon';
 import { InputProps } from './Input';
-
-function fixControlledValue<T>(value: T) {
-  if (typeof value === 'undefined' || value === null) {
-    return '';
-  }
-  return value;
-}
+import { fixControlledValue, setValue } from './calculateValue';
 
 export interface AutoSizeType {
   minRows?: number;
@@ -86,36 +80,8 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     this.textAreaRef = textArea;
   };
 
-  setValue(
-    value: string,
-    e: React.ChangeEvent<HTMLTextAreaElement> | React.MouseEvent<HTMLElement, MouseEvent>,
-    callback?: () => void,
-  ) {
-    if (!('value' in this.props)) {
-      this.setState({ value }, callback);
-    }
-    const { onChange } = this.props;
-    if (onChange) {
-      let event = e;
-      if (e.type === 'click') {
-        // click clear icon
-        event = Object.create(e);
-        event.target = this.textAreaRef;
-        event.currentTarget = this.textAreaRef;
-        const originalInputValue = this.textAreaRef.value;
-        // change textarea value cause e.target.value should be '' when clear input
-        this.textAreaRef.value = '';
-        onChange(event as React.ChangeEvent<HTMLTextAreaElement>);
-        // reset textarea value
-        this.textAreaRef.value = originalInputValue;
-        return;
-      }
-      onChange(event as React.ChangeEvent<HTMLTextAreaElement>);
-    }
-  }
-
   handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    this.setValue(e.target.value, e, () => {
+    setValue.call(this, e.target.value, 'textAreaRef', e, () => {
       this.resizeTextarea();
     });
   };
@@ -159,7 +125,7 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
   }
 
   handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    this.setValue('', e, () => {
+    setValue.call(this, '', 'textAreaRef', e, () => {
       this.resizeTextarea();
       this.focus();
     });

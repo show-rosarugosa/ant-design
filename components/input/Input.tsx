@@ -11,13 +11,7 @@ import Password from './Password';
 import Icon from '../icon';
 import { Omit, tuple } from '../_util/type';
 import warning from '../_util/warning';
-
-function fixControlledValue<T>(value: T) {
-  if (typeof value === 'undefined' || value === null) {
-    return '';
-  }
-  return value;
-}
+import { fixControlledValue, setValue } from './calculateValue';
 
 function hasPrefixSuffix(props: InputProps) {
   return !!('prefix' in props || props.suffix || props.allowClear);
@@ -115,34 +109,6 @@ class Input extends React.Component<InputProps, any> {
     });
   }
 
-  setValue(
-    value: string,
-    e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement, MouseEvent>,
-    callback?: () => void,
-  ) {
-    if (!('value' in this.props)) {
-      this.setState({ value }, callback);
-    }
-    const { onChange } = this.props;
-    if (onChange) {
-      let event = e;
-      if (e.type === 'click') {
-        // click clear icon
-        event = Object.create(e);
-        event.target = this.input;
-        event.currentTarget = this.input;
-        const originalInputValue = this.input.value;
-        // change input value cause e.target.value should be '' when clear input
-        this.input.value = '';
-        onChange(event as React.ChangeEvent<HTMLInputElement>);
-        // reset input value
-        this.input.value = originalInputValue;
-        return;
-      }
-      onChange(event as React.ChangeEvent<HTMLInputElement>);
-    }
-  }
-
   saveInput = (node: HTMLInputElement) => {
     this.input = node;
   };
@@ -158,13 +124,13 @@ class Input extends React.Component<InputProps, any> {
   };
 
   handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    this.setValue('', e, () => {
+    setValue.call(this, '', 'input', e, () => {
       this.focus();
     });
   };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setValue(e.target.value, e);
+    setValue.call(this, e.target.value, 'input', e);
   };
 
   focus() {
