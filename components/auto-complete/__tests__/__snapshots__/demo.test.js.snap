@@ -279,11 +279,16 @@ exports[`renders ./components/auto-complete/demo/custom.md correctly 1`] = `
           <div
             class="ant-select-search__field__wrap"
           >
-            <textarea
-              class="ant-input custom ant-select-search__field"
-              placeholder="input here"
+            <span
+              class="custom ant-select-search__field ant-input-affix-wrapper"
               style="height:50px"
-            />
+            >
+              <textarea
+                class="ant-input custom ant-select-search__field"
+                placeholder="input here"
+                style="height:50px"
+              />
+            </span>
             <span
               class="ant-select-search__field__mirror"
             >

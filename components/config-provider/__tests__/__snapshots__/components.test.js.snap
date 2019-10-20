@@ -7241,9 +7241,13 @@ exports[`ConfigProvider components Input configProvider 1`] = `
       </span>
     </span>
   </span>
-  <textarea
-    class="config-input"
-  />
+  <span
+    class="config-input-affix-wrapper"
+  >
+    <textarea
+      class="config-input"
+    />
+  </span>
 </div>
 `;
 
@@ -7291,9 +7295,13 @@ exports[`ConfigProvider components Input normal 1`] = `
       </span>
     </span>
   </span>
-  <textarea
-    class="ant-input"
-  />
+  <span
+    class="ant-input-affix-wrapper"
+  >
+    <textarea
+      class="ant-input"
+    />
+  </span>
 </div>
 `;
 
@@ -7341,9 +7349,13 @@ exports[`ConfigProvider components Input prefixCls 1`] = `
       </span>
     </span>
   </span>
-  <textarea
-    class="prefix-Input"
-  />
+  <span
+    class="prefix-Input-affix-wrapper"
+  >
+    <textarea
+      class="prefix-Input"
+    />
+  </span>
 </div>
 `;
 
