@@ -7,6 +7,14 @@ import calculateNodeHeight from './calculateNodeHeight';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import raf from '../_util/raf';
 import warning from '../_util/warning';
+import Icon from '../icon';
+
+function fixControlledValue<T>(value: T) {
+  if (typeof value === 'undefined' || value === null) {
+    return '';
+  }
+  return value;
+}
 
 export interface AutoSizeType {
   minRows?: number;
@@ -21,12 +29,14 @@ export interface TextAreaProps extends HTMLTextareaProps {
   autosize?: boolean | AutoSizeType;
   autoSize?: boolean | AutoSizeType;
   onPressEnter?: React.KeyboardEventHandler<HTMLTextAreaElement>;
+  allowClear?: boolean;
 }
 
 export interface TextAreaState {
   textareaStyles?: React.CSSProperties;
   /** We need add process style to disable scroll first and then add back to avoid unexpected scrollbar  */
   resizing?: boolean;
+  value?: string | string[] | number;
 }
 
 class TextArea extends React.Component<TextAreaProps, TextAreaState> {
@@ -34,10 +44,15 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
 
   resizeFrameId: number;
 
-  state = {
-    textareaStyles: {},
-    resizing: false,
-  };
+  constructor(props: TextAreaProps) {
+    super(props);
+    const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
+    this.state = {
+      textareaStyles: {},
+      resizing: false,
+      value,
+    };
+  }
 
   private textAreaRef: HTMLTextAreaElement;
 
@@ -61,13 +76,16 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     this.textAreaRef = textArea;
   };
 
-  handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  handleTextareaChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement> | React.MouseEvent<HTMLElement, MouseEvent>,
+  ) => {
     if (!('value' in this.props)) {
       this.resizeTextarea();
+      this.setState({ value: (e as React.ChangeEvent<HTMLTextAreaElement>).target.value });
     }
     const { onChange } = this.props;
     if (onChange) {
-      onChange(e);
+      onChange(e as React.ChangeEvent<HTMLTextAreaElement>);
     }
   };
 
@@ -109,11 +127,64 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     this.textAreaRef.blur();
   }
 
+  handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (!('value' in this.props)) {
+      this.setState({ value: '' }, this.focus);
+    }
+    // click clear icon
+    const event = Object.create(e);
+    event.target = this.textAreaRef;
+    event.currentTarget = this.textAreaRef;
+    const originalInputValue = this.textAreaRef.value;
+    // change textarea value cause e.target.value should be '' when clear input
+    this.textAreaRef.value = '';
+    this.handleTextareaChange(event);
+    // reset textarea value
+    this.textAreaRef.value = originalInputValue;
+  };
+
+  renderClearIcon(prefixCls: string) {
+    const { allowClear, disabled } = this.props;
+    const { value } = this.state;
+    if (!allowClear || disabled || value === undefined || value === null || value === '') {
+      return null;
+    }
+    return (
+      <Icon
+        type="close-circle"
+        theme="filled"
+        onClick={this.handleReset}
+        className={`${prefixCls}-textarea-clear-icon`}
+        role="button"
+      />
+    );
+  }
+
+  renderTextAreaWithClearIcon(prefixCls: string, children: React.ReactElement<any>) {
+    const { props } = this;
+    const affixWrapperCls = classNames(props.className, `${prefixCls}-affix-wrapper`);
+    return (
+      <span className={affixWrapperCls} style={props.style}>
+        {React.cloneElement(children, {
+          style: null,
+        })}
+        {this.renderClearIcon(prefixCls)}
+      </span>
+    );
+  }
+
   renderTextArea = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { textareaStyles, resizing } = this.state;
+    const { textareaStyles, resizing, value } = this.state;
     const { prefixCls: customizePrefixCls, className, disabled, autoSize, autosize } = this.props;
     const { ...props } = this.props;
-    const otherProps = omit(props, ['prefixCls', 'onPressEnter', 'autoSize', 'autosize']);
+    const otherProps = omit(props, [
+      'prefixCls',
+      'onPressEnter',
+      'autoSize',
+      'autosize',
+      'defaultValue',
+      'allowClear',
+    ]);
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     const cls = classNames(prefixCls, className, {
       [`${prefixCls}-disabled`]: disabled,
@@ -135,17 +206,19 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     if ('value' in otherProps) {
       otherProps.value = otherProps.value || '';
     }
-    return (
+    return this.renderTextAreaWithClearIcon(
+      prefixCls,
       <ResizeObserver onResize={this.resizeOnNextFrame} disabled={!(autoSize || autosize)}>
         <textarea
           {...otherProps}
+          value={fixControlledValue(value)}
           className={cls}
           style={style}
           onKeyDown={this.handleKeyDown}
           onChange={this.handleTextareaChange}
           ref={this.saveTextAreaRef}
         />
-      </ResizeObserver>
+      </ResizeObserver>,
     );
   };
 
