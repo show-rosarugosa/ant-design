@@ -161,10 +161,14 @@ exports[`renders ./components/comment/demo/editor.md correctly 1`] = `
                   <span
                     class="ant-form-item-children"
                   >
-                    <textarea
-                      class="ant-input"
-                      rows="4"
-                    />
+                    <span
+                      class="ant-input-affix-wrapper"
+                    >
+                      <textarea
+                        class="ant-input"
+                        rows="4"
+                      />
+                    </span>
                   </span>
                 </div>
               </div>
