@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
-import omit from 'omit.js';
-import classNames from 'classnames';
 import ResizeObserver from 'rc-resize-observer';
 import calculateNodeHeight from './calculateNodeHeight';
 import ClearableInput from './ClearableInput';
 import raf from '../_util/raf';
 import warning from '../_util/warning';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 export interface AutoSizeType {
   minRows?: number;
@@ -44,10 +41,10 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     };
   }
 
-  textArea: ClearableInput;
+  textArea: HTMLTextAreaElement;
 
-  saveTextArea = (clearableInput: ClearableInput) => {
-    this.textArea = clearableInput;
+  saveTextArea = (input: ClearableInput) => {
+    this.textArea = input.inputElement as HTMLTextAreaElement;
   };
 
   componentDidMount() {
@@ -67,18 +64,12 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
   };
 
   resizeTextarea = () => {
-    const props = this.props as TextAreaProps;
-    const autoSize = props.autoSize || props.autosize;
-    if (!autoSize || !this.textArea.inputElement) {
+    const autoSize = this.props.autoSize || this.props.autosize;
+    if (!autoSize || !this.textArea) {
       return;
     }
     const { minRows, maxRows } = autoSize as AutoSizeType;
-    const textareaStyles = calculateNodeHeight(
-      this.textArea.inputElement as HTMLTextAreaElement,
-      false,
-      minRows,
-      maxRows,
-    );
+    const textareaStyles = calculateNodeHeight(this.textArea, false, minRows, maxRows);
     this.setState({ textareaStyles, resizing: true }, () => {
       raf.cancel(this.resizeFrameId);
       this.resizeFrameId = raf(() => {
@@ -92,62 +83,31 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     raf.cancel(this.resizeFrameId);
   }
 
-  renderTextArea = ({ getPrefixCls }: ConfigConsumerProps) => {
+  renderTextArea = () => {
+    const { autoSize, autosize } = this.props;
     const { textareaStyles, resizing } = this.state;
-    const { prefixCls: customizePrefixCls, className, disabled, autoSize, autosize } = this.props;
-    const { ...props } = this.props;
-    const otherProps = omit(props, [
-      'prefixCls',
-      'onPressEnter',
-      'autoSize',
-      'autosize',
-      'defaultValue',
-      'allowClear',
-    ]);
-    const prefixCls = getPrefixCls('input', customizePrefixCls);
-    const cls = classNames(prefixCls, className, {
-      [`${prefixCls}-disabled`]: disabled,
-    });
-
     warning(
       autosize === undefined,
       'Input.TextArea',
       'autosize is deprecated, please use autoSize instead.',
     );
-
-    const style = {
-      ...props.style,
-      ...textareaStyles,
-      ...(resizing ? { overflow: 'hidden' } : null),
-    };
-    // Fix https://github.com/ant-design/ant-design/issues/6776
-    // Make sure it could be reset when using form.getFieldDecorator
-    if ('value' in otherProps) {
-      otherProps.value = otherProps.value || '';
-    }
+    const { props } = this;
     return (
       <ResizeObserver onResize={this.resizeOnNextFrame} disabled={!(autoSize || autosize)}>
         <ClearableInput
           type="text"
-          cls={cls}
-          resizeTextarea={this.resizeTextarea}
-          onChange={props.onChange}
-          className={props.className}
-          disabled={props.disabled}
-          otherProps={otherProps}
-          defaultValue={props.defaultValue}
-          value={props.value}
-          prefixCls={prefixCls}
-          allowClear={props.allowClear}
-          style={style}
+          textareaStyles={textareaStyles}
+          resizing={resizing}
+          {...props}
           ref={this.saveTextArea}
+          resizeTextarea={this.resizeTextarea}
         />
       </ResizeObserver>
     );
   };
 
   render() {
-    return <ConfigConsumer>{this.renderTextArea}</ConfigConsumer>;
+    return this.renderTextArea();
   }
 }
 

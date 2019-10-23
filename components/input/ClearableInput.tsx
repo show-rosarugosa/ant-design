@@ -1,10 +1,12 @@
 import * as React from 'react';
-import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
+import omit from 'omit.js';
+import classNames from 'classnames';
 import Icon from '../icon';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import { tuple } from '../_util/type';
-import { InputProps, InputSizes } from './Input';
+import { InputProps } from './Input';
+import { TextAreaProps } from './TextArea';
 
 const ClearableInputType = tuple('text', 'input');
 
@@ -19,31 +21,15 @@ function fixControlledValue<T>(value: T) {
   return value;
 }
 
-interface BasicProps {
-  prefixCls: string;
-  defaultValue?: any;
-  value?: any;
-  allowClear?: boolean;
-  className?: string;
-  disabled?: boolean;
-  onChange?: Function;
-  otherProps: Array<any>;
-  style: any;
+interface ClearableInputTextAreaProps extends TextAreaProps {
+  textareaStyles?: React.CSSProperties;
+  resizeTextarea: Function;
+  resizing?: boolean;
   type: (typeof ClearableInputType)[number];
 }
 
-interface ClearableInputTextAreaProps extends BasicProps {
-  cls: string;
-  resizeTextarea: Function;
-}
-
-interface ClearableInputProps extends BasicProps {
-  size?: (typeof InputSizes)[number];
-  addonBefore?: React.ReactNode;
-  addonAfter?: React.ReactNode;
-  onPressEnter?: React.KeyboardEventHandler<HTMLInputElement>;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
+interface ClearableInputProps extends InputProps {
+  type: (typeof ClearableInputType)[number];
 }
 
 export interface ClearableInputState {
@@ -62,6 +48,15 @@ class ClearableInput extends React.Component<
     this.state = {
       value,
     };
+  }
+
+  static getDerivedStateFromProps(nextProps: InputProps | TextAreaProps) {
+    if ('value' in nextProps) {
+      return {
+        value: nextProps.value,
+      };
+    }
+    return null;
   }
 
   saveInputElementRef = (inputElement: HTMLInputElement) => {
@@ -269,11 +264,35 @@ class ClearableInput extends React.Component<
     );
   }
 
-  renderTextArea = () => {
+  renderTextArea = (prefixCls: string) => {
     const { value } = this.state;
-    const { prefixCls, cls, style, otherProps } = this.props as ClearableInputTextAreaProps;
-    return this.renderTextAreaWithClearIcon(
-      prefixCls,
+    const { className, disabled, textareaStyles, resizing } = this
+      .props as ClearableInputTextAreaProps;
+    const otherProps = omit(this.props, [
+      'prefixCls',
+      'onPressEnter',
+      'autoSize',
+      'autosize',
+      'defaultValue',
+      'allowClear',
+      'textareaStyles',
+      'resizeTextarea',
+      'resizing',
+    ]);
+    const cls = classNames(prefixCls, className, {
+      [`${prefixCls}-disabled`]: disabled,
+    });
+    // Fix https://github.com/ant-design/ant-design/issues/6776
+    // Make sure it could be reset when using form.getFieldDecorator
+    if ('value' in otherProps) {
+      otherProps.value = otherProps.value || '';
+    }
+    const style = {
+      ...this.props.style,
+      ...textareaStyles,
+      ...(resizing ? { overflow: 'hidden' } : null),
+    };
+    return (
       <textarea
         {...otherProps}
         value={fixControlledValue(value)}
@@ -281,13 +300,29 @@ class ClearableInput extends React.Component<
         style={style}
         onChange={this.handleTextareaChange}
         ref={this.saveTextAreaElementRef}
-      />,
+      />
     );
   };
 
   renderInput = (prefixCls: string) => {
     const { value } = this.state;
-    const { className, addonBefore, addonAfter, otherProps } = this.props as ClearableInputProps;
+    const { className, addonBefore, addonAfter } = this.props as ClearableInputProps;
+    // Fix https://fb.me/react-unknown-prop
+    const otherProps = omit(this.props, [
+      'prefixCls',
+      'onPressEnter',
+      'addonBefore',
+      'addonAfter',
+      'prefix',
+      'suffix',
+      'allowClear',
+      // Input elements must be either controlled or uncontrolled,
+      // specify either the value prop, or the defaultValue prop, but not both.
+      'defaultValue',
+      'size',
+      'resizeTextarea',
+      'resizing',
+    ]);
     return this.renderLabeledIcon(
       prefixCls,
       <input
@@ -306,7 +341,7 @@ class ClearableInput extends React.Component<
     const { prefixCls: customizePrefixCls } = this.props;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     return this.props.type === ClearableInputType[0]
-      ? this.renderTextArea()
+      ? this.renderTextAreaWithClearIcon(prefixCls, this.renderTextArea(prefixCls))
       : this.renderLabeledInput(prefixCls, this.renderInput(prefixCls));
   };
 

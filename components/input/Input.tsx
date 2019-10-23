@@ -1,11 +1,9 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import omit from 'omit.js';
 import { polyfill } from 'react-lifecycles-compat';
 import Group from './Group';
 import Search from './Search';
 import TextArea from './TextArea';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Password from './Password';
 import { Omit, tuple } from '../_util/type';
 import warning from '../_util/warning';
@@ -93,62 +91,13 @@ class Input extends React.Component<InputProps, any> {
     this.input = input.inputElement as HTMLInputElement;
   };
 
-  renderInput(prefixCls: string) {
-    const {
-      className,
-      addonBefore,
-      style,
-      value,
-      addonAfter,
-      allowClear,
-      prefix,
-      suffix,
-      disabled,
-      defaultValue,
-    } = this.props;
-    // Fix https://fb.me/react-unknown-prop
-    const otherProps = omit(this.props, [
-      'prefixCls',
-      'onPressEnter',
-      'addonBefore',
-      'addonAfter',
-      'prefix',
-      'suffix',
-      'allowClear',
-      // Input elements must be either controlled or uncontrolled,
-      // specify either the value prop, or the defaultValue prop, but not both.
-      'defaultValue',
-      'size',
-    ]);
-
-    return (
-      <ClearableInput
-        style={style}
-        type="input"
-        defaultValue={defaultValue}
-        value={value}
-        disabled={disabled}
-        suffix={suffix}
-        prefix={prefix}
-        allowClear={allowClear}
-        otherProps={otherProps}
-        prefixCls={prefixCls}
-        addonBefore={addonBefore}
-        addonAfter={addonAfter}
-        className={className}
-        ref={this.saveInput}
-      />
-    );
-  }
-
-  renderComponent = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { prefixCls: customizePrefixCls } = this.props;
-    const prefixCls = getPrefixCls('input', customizePrefixCls);
-    return this.renderInput(prefixCls);
+  renderInput = () => {
+    const { props } = this;
+    return <ClearableInput {...props} type="input" ref={this.saveInput} />;
   };
 
   render() {
-    return <ConfigConsumer>{this.renderComponent}</ConfigConsumer>;
+    return this.renderInput();
   }
 }
 
