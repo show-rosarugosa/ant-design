@@ -1,15 +1,13 @@
 import * as React from 'react';
+import { polyfill } from 'react-lifecycles-compat';
 import omit from 'omit.js';
 import classNames from 'classnames';
-import { polyfill } from 'react-lifecycles-compat';
 import ResizeObserver from 'rc-resize-observer';
 import calculateNodeHeight from './calculateNodeHeight';
-import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import ClearableInput from './ClearableInput';
 import raf from '../_util/raf';
 import warning from '../_util/warning';
-import Icon from '../icon';
-import { InputProps } from './Input';
-import { fixControlledValue, setValue } from './calculateValue';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 export interface AutoSizeType {
   minRows?: number;
@@ -31,7 +29,6 @@ export interface TextAreaState {
   textareaStyles?: React.CSSProperties;
   /** We need add process style to disable scroll first and then add back to avoid unexpected scrollbar  */
   resizing?: boolean;
-  value?: any;
 }
 
 class TextArea extends React.Component<TextAreaProps, TextAreaState> {
@@ -41,24 +38,17 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
 
   constructor(props: TextAreaProps) {
     super(props);
-    const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
     this.state = {
       textareaStyles: {},
       resizing: false,
-      value,
     };
   }
 
-  static getDerivedStateFromProps(nextProps: InputProps) {
-    if ('value' in nextProps) {
-      return {
-        value: nextProps.value,
-      };
-    }
-    return null;
-  }
+  textArea: ClearableInput;
 
-  private textAreaRef: HTMLTextAreaElement;
+  saveTextArea = (clearableInput: ClearableInput) => {
+    this.textArea = clearableInput;
+  };
 
   componentDidMount() {
     this.resizeTextarea();
@@ -71,43 +61,24 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     }
   }
 
-  componentWillUnmount() {
-    raf.cancel(this.nextFrameActionId);
-    raf.cancel(this.resizeFrameId);
-  }
-
-  saveTextAreaRef = (textArea: HTMLTextAreaElement) => {
-    this.textAreaRef = textArea;
-  };
-
-  handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setValue.call(this, e.target.value, 'textAreaRef', e, () => {
-      this.resizeTextarea();
-    });
-  };
-
-  handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    const { onPressEnter, onKeyDown } = this.props;
-    if (e.keyCode === 13 && onPressEnter) {
-      onPressEnter(e);
-    }
-    if (onKeyDown) {
-      onKeyDown(e);
-    }
-  };
-
   resizeOnNextFrame = () => {
     raf.cancel(this.nextFrameActionId);
     this.nextFrameActionId = raf(this.resizeTextarea);
   };
 
   resizeTextarea = () => {
-    const autoSize = this.props.autoSize || this.props.autosize;
-    if (!autoSize || !this.textAreaRef) {
+    const props = this.props as TextAreaProps;
+    const autoSize = props.autoSize || props.autosize;
+    if (!autoSize || !this.textArea.inputElement) {
       return;
     }
     const { minRows, maxRows } = autoSize as AutoSizeType;
-    const textareaStyles = calculateNodeHeight(this.textAreaRef, false, minRows, maxRows);
+    const textareaStyles = calculateNodeHeight(
+      this.textArea.inputElement as HTMLTextAreaElement,
+      false,
+      minRows,
+      maxRows,
+    );
     this.setState({ textareaStyles, resizing: true }, () => {
       raf.cancel(this.resizeFrameId);
       this.resizeFrameId = raf(() => {
@@ -116,53 +87,13 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     });
   };
 
-  focus() {
-    this.textAreaRef.focus();
-  }
-
-  blur() {
-    this.textAreaRef.blur();
-  }
-
-  handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setValue.call(this, '', 'textAreaRef', e, () => {
-      this.resizeTextarea();
-      this.focus();
-    });
-  };
-
-  renderClearIcon(prefixCls: string) {
-    const { allowClear, disabled } = this.props;
-    const { value } = this.state;
-    if (!allowClear || disabled || value === undefined || value === null || value === '') {
-      return null;
-    }
-    return (
-      <Icon
-        type="close-circle"
-        theme="filled"
-        onClick={this.handleReset}
-        className={`${prefixCls}-textarea-clear-icon`}
-        role="button"
-      />
-    );
-  }
-
-  renderTextAreaWithClearIcon(prefixCls: string, children: React.ReactElement<any>) {
-    const { props } = this;
-    const affixWrapperCls = classNames(props.className, `${prefixCls}-affix-wrapper`);
-    return (
-      <span className={affixWrapperCls} style={props.style}>
-        {React.cloneElement(children, {
-          style: null,
-        })}
-        {this.renderClearIcon(prefixCls)}
-      </span>
-    );
+  componentWillUnmount() {
+    raf.cancel(this.nextFrameActionId);
+    raf.cancel(this.resizeFrameId);
   }
 
   renderTextArea = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { textareaStyles, resizing, value } = this.state;
+    const { textareaStyles, resizing } = this.state;
     const { prefixCls: customizePrefixCls, className, disabled, autoSize, autosize } = this.props;
     const { ...props } = this.props;
     const otherProps = omit(props, [
@@ -194,19 +125,24 @@ class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     if ('value' in otherProps) {
       otherProps.value = otherProps.value || '';
     }
-    return this.renderTextAreaWithClearIcon(
-      prefixCls,
+    return (
       <ResizeObserver onResize={this.resizeOnNextFrame} disabled={!(autoSize || autosize)}>
-        <textarea
-          {...otherProps}
-          value={fixControlledValue(value)}
-          className={cls}
+        <ClearableInput
+          type="text"
+          cls={cls}
+          resizeTextarea={this.resizeTextarea}
+          onChange={props.onChange}
+          className={props.className}
+          disabled={props.disabled}
+          otherProps={otherProps}
+          defaultValue={props.defaultValue}
+          value={props.value}
+          prefixCls={prefixCls}
+          allowClear={props.allowClear}
           style={style}
-          onKeyDown={this.handleKeyDown}
-          onChange={this.handleTextareaChange}
-          ref={this.saveTextAreaRef}
+          ref={this.saveTextArea}
         />
-      </ResizeObserver>,
+      </ResizeObserver>
     );
   };
 

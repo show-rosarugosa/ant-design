@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
-import classNames from 'classnames';
 import omit from 'omit.js';
 import { polyfill } from 'react-lifecycles-compat';
 import Group from './Group';
@@ -8,10 +7,9 @@ import Search from './Search';
 import TextArea from './TextArea';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Password from './Password';
-import Icon from '../icon';
 import { Omit, tuple } from '../_util/type';
 import warning from '../_util/warning';
-import { fixControlledValue, setValue } from './calculateValue';
+import ClearableInput from './ClearableInput';
 
 function hasPrefixSuffix(props: InputProps) {
   return !!('prefix' in props || props.suffix || props.allowClear);
@@ -66,24 +64,7 @@ class Input extends React.Component<InputProps, any> {
     allowClear: PropTypes.bool,
   };
 
-  static getDerivedStateFromProps(nextProps: InputProps) {
-    if ('value' in nextProps) {
-      return {
-        value: nextProps.value,
-      };
-    }
-    return null;
-  }
-
   input: HTMLInputElement;
-
-  constructor(props: InputProps) {
-    super(props);
-    const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
-    this.state = {
-      value,
-    };
-  }
 
   // Since polyfill `getSnapshotBeforeUpdate` need work with `componentDidUpdate`.
   // We keep an empty function here.
@@ -100,39 +81,6 @@ class Input extends React.Component<InputProps, any> {
     return null;
   }
 
-  getInputClassName(prefixCls: string) {
-    const { size, disabled } = this.props;
-    return classNames(prefixCls, {
-      [`${prefixCls}-sm`]: size === 'small',
-      [`${prefixCls}-lg`]: size === 'large',
-      [`${prefixCls}-disabled`]: disabled,
-    });
-  }
-
-  saveInput = (node: HTMLInputElement) => {
-    this.input = node;
-  };
-
-  handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const { onPressEnter, onKeyDown } = this.props;
-    if (e.keyCode === 13 && onPressEnter) {
-      onPressEnter(e);
-    }
-    if (onKeyDown) {
-      onKeyDown(e);
-    }
-  };
-
-  handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setValue.call(this, '', 'input', e, () => {
-      this.focus();
-    });
-  };
-
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue.call(this, e.target.value, 'input', e);
-  };
-
   focus() {
     this.input.focus();
   }
@@ -145,105 +93,23 @@ class Input extends React.Component<InputProps, any> {
     this.input.select();
   }
 
-  renderClearIcon(prefixCls: string) {
-    const { allowClear, disabled } = this.props;
-    const { value } = this.state;
-    if (!allowClear || disabled || value === undefined || value === null || value === '') {
-      return null;
-    }
-    return (
-      <Icon
-        type="close-circle"
-        theme="filled"
-        onClick={this.handleReset}
-        className={`${prefixCls}-clear-icon`}
-        role="button"
-      />
-    );
-  }
-
-  renderSuffix(prefixCls: string) {
-    const { suffix, allowClear } = this.props;
-    if (suffix || allowClear) {
-      return (
-        <span className={`${prefixCls}-suffix`}>
-          {this.renderClearIcon(prefixCls)}
-          {suffix}
-        </span>
-      );
-    }
-    return null;
-  }
-
-  renderLabeledInput(prefixCls: string, children: React.ReactElement<any>) {
-    const { addonBefore, addonAfter, style, size, className } = this.props;
-    // Not wrap when there is not addons
-    if (!addonBefore && !addonAfter) {
-      return children;
-    }
-
-    const wrapperClassName = `${prefixCls}-group`;
-    const addonClassName = `${wrapperClassName}-addon`;
-    const addonBeforeNode = addonBefore ? (
-      <span className={addonClassName}>{addonBefore}</span>
-    ) : null;
-    const addonAfterNode = addonAfter ? <span className={addonClassName}>{addonAfter}</span> : null;
-
-    const mergedWrapperClassName = classNames(`${prefixCls}-wrapper`, {
-      [wrapperClassName]: addonBefore || addonAfter,
-    });
-
-    const mergedGroupClassName = classNames(className, `${prefixCls}-group-wrapper`, {
-      [`${prefixCls}-group-wrapper-sm`]: size === 'small',
-      [`${prefixCls}-group-wrapper-lg`]: size === 'large',
-    });
-
-    // Need another wrapper for changing display:table to display:inline-block
-    // and put style prop in wrapper
-    return (
-      <span className={mergedGroupClassName} style={style}>
-        <span className={mergedWrapperClassName}>
-          {addonBeforeNode}
-          {React.cloneElement(children, { style: null })}
-          {addonAfterNode}
-        </span>
-      </span>
-    );
-  }
-
-  renderLabeledIcon(prefixCls: string, children: React.ReactElement<any>) {
-    const { props } = this;
-    const suffix = this.renderSuffix(prefixCls);
-
-    if (!hasPrefixSuffix(props)) {
-      return children;
-    }
-
-    const prefix = props.prefix ? (
-      <span className={`${prefixCls}-prefix`}>{props.prefix}</span>
-    ) : null;
-
-    const affixWrapperCls = classNames(props.className, `${prefixCls}-affix-wrapper`, {
-      [`${prefixCls}-affix-wrapper-sm`]: props.size === 'small',
-      [`${prefixCls}-affix-wrapper-lg`]: props.size === 'large',
-      [`${prefixCls}-affix-wrapper-with-clear-btn`]:
-        props.suffix && props.allowClear && this.state.value,
-    });
-    return (
-      <span className={affixWrapperCls} style={props.style}>
-        {prefix}
-        {React.cloneElement(children, {
-          style: null,
-          className: this.getInputClassName(prefixCls),
-        })}
-        {suffix}
-      </span>
-    );
-  }
+  saveInput = (input: ClearableInput) => {
+    this.input = input.inputElement as HTMLInputElement;
+  };
 
   renderInput(prefixCls: string) {
-    const { className, addonBefore, addonAfter } = this.props;
-    const { value } = this.state;
+    const {
+      className,
+      addonBefore,
+      style,
+      value,
+      addonAfter,
+      allowClear,
+      prefix,
+      suffix,
+      disabled,
+      defaultValue,
+    } = this.props;
     // Fix https://fb.me/react-unknown-prop
     const otherProps = omit(this.props, [
       'prefixCls',
@@ -259,25 +125,30 @@ class Input extends React.Component<InputProps, any> {
       'size',
     ]);
 
-    return this.renderLabeledIcon(
-      prefixCls,
-      <input
-        {...otherProps}
-        value={fixControlledValue(value)}
-        onChange={this.handleChange}
-        className={classNames(this.getInputClassName(prefixCls), {
-          [className!]: className && !addonBefore && !addonAfter,
-        })}
-        onKeyDown={this.handleKeyDown}
+    return (
+      <ClearableInput
+        style={style}
+        type="input"
+        defaultValue={defaultValue}
+        value={value}
+        disabled={disabled}
+        suffix={suffix}
+        prefix={prefix}
+        allowClear={allowClear}
+        otherProps={otherProps}
+        prefixCls={prefixCls}
+        addonBefore={addonBefore}
+        addonAfter={addonAfter}
+        className={className}
         ref={this.saveInput}
-      />,
+      />
     );
   }
 
   renderComponent = ({ getPrefixCls }: ConfigConsumerProps) => {
     const { prefixCls: customizePrefixCls } = this.props;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    return this.renderLabeledInput(prefixCls, this.renderInput(prefixCls));
+    return this.renderInput(prefixCls);
   };
 
   render() {
