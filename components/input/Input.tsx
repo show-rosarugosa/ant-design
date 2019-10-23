@@ -9,13 +9,9 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import Password from './Password';
 import { Omit, tuple } from '../_util/type';
 import warning from '../_util/warning';
-import ClearableInput from './ClearableInput';
+import ClearableInput, { hasPrefixSuffix } from './ClearableInput';
 
-function hasPrefixSuffix(props: InputProps) {
-  return !!('prefix' in props || props.suffix || props.allowClear);
-}
-
-const InputSizes = tuple('small', 'default', 'large');
+export const InputSizes = tuple('small', 'default', 'large');
 
 export interface InputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix'> {

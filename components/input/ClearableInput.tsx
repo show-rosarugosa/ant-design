@@ -2,17 +2,15 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { polyfill } from 'react-lifecycles-compat';
 import Icon from '../icon';
-import { ConfigConsumer } from '../config-provider';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import { tuple } from '../_util/type';
-import { InputProps } from './Input';
+import { InputProps, InputSizes } from './Input';
+
+const ClearableInputType = tuple('text', 'input');
 
 export function hasPrefixSuffix(props: InputProps | ClearableInputProps) {
   return !!('prefix' in props || props.suffix || props.allowClear);
 }
-
-const InputSizes = tuple('small', 'default', 'large');
-
-const ClearableInputType = tuple('text', 'input');
 
 function fixControlledValue<T>(value: T) {
   if (typeof value === 'undefined' || value === null) {
@@ -162,17 +160,21 @@ class ClearableInput extends React.Component<
   };
 
   renderClearIcon(prefixCls: string) {
-    const { allowClear, disabled } = this.props;
+    const { allowClear, disabled, type } = this.props;
     const { value } = this.state;
     if (!allowClear || disabled || value === undefined || value === null || value === '') {
       return null;
     }
+    const className =
+      type === ClearableInputType[0]
+        ? `${prefixCls}-textarea-clear-icon`
+        : `${prefixCls}-clear-icon`;
     return (
       <Icon
         type="close-circle"
         theme="filled"
         onClick={this.handleReset}
-        className={`${prefixCls}-textarea-clear-icon`}
+        className={className}
         role="button"
       />
     );
@@ -241,7 +243,7 @@ class ClearableInput extends React.Component<
     const props = this.props as ClearableInputProps;
     const suffix = this.renderSuffix(prefixCls);
 
-    if (!hasPrefixSuffix(props)) {
+    if (!hasPrefixSuffix(props as ClearableInputProps)) {
       return children;
     }
 
@@ -300,8 +302,9 @@ class ClearableInput extends React.Component<
     );
   };
 
-  renderComponent = () => {
-    const { prefixCls } = this.props;
+  renderComponent = ({ getPrefixCls }: ConfigConsumerProps) => {
+    const { prefixCls: customizePrefixCls } = this.props;
+    const prefixCls = getPrefixCls('input', customizePrefixCls);
     return this.props.type === ClearableInputType[0]
       ? this.renderTextArea()
       : this.renderLabeledInput(prefixCls, this.renderInput(prefixCls));
