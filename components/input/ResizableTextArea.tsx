@@ -18,16 +18,13 @@ export interface TextAreaState {
   /** We need add process style to disable scroll first and then add back to avoid unexpected scrollbar  */
   resizing?: boolean;
 }
-interface ResizableTextAreaProps extends TextAreaProps {
-  value: any;
-}
 
-class ResizableTextArea extends React.Component<ResizableTextAreaProps, TextAreaState> {
+class ResizableTextArea extends React.Component<TextAreaProps, TextAreaState> {
   nextFrameActionId: number;
 
   resizeFrameId: number;
 
-  constructor(props: ResizableTextAreaProps) {
+  constructor(props: TextAreaProps) {
     super(props);
     this.state = {
       textareaStyles: {},

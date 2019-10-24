@@ -2,6 +2,7 @@ import * as React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
 import ClearableInput from './ClearableInput';
 import ResizableTextArea, { AutoSizeType } from './ResizableTextArea';
+import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 
 export type HTMLTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
@@ -27,15 +28,15 @@ class TextArea extends React.Component<TextAreaProps> {
     this.resizableTextArea.textArea.blur();
   }
 
-  saveTextArea = (input: ResizableTextArea) => {
-    this.resizableTextArea = input;
+  saveTextArea = (resizableTextArea: ResizableTextArea) => {
+    this.resizableTextArea = resizableTextArea;
   };
 
-  saveClearableInput = (input: ClearableInput) => {
-    this.clearableInput = input;
+  saveClearableInput = (clearableInput: ClearableInput) => {
+    this.clearableInput = clearableInput;
   };
 
-  handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.clearableInput.setValue(e.target.value, e, () => {
       this.resizableTextArea.resizeTextarea();
     });
@@ -54,21 +55,42 @@ class TextArea extends React.Component<TextAreaProps> {
   renderTextArea = (prefixCls: string) => {
     const { props } = this;
     return (
-      <ClearableInput prefixCls={} inputType={} target={}>
-        <ResizableTextArea
-          {...(props as TextAreaProps)}
-          prefixCls={prefixCls}
-          value={fixControlledValue(value)}
-          onKeyDown={this.handleKeyDown}
-          onChange={this.handleChange}
-          ref={this.saveTextArea}
-        />
-      </ClearableInput>
+      <ResizableTextArea
+        {...(props as TextAreaProps)}
+        prefixCls={prefixCls}
+        onKeyDown={this.handleKeyDown}
+        onChange={this.handleChange}
+        ref={this.saveTextArea}
+      />
+    );
+  };
+
+  getRef = () => {
+    return this.resizableTextArea.textArea;
+  };
+
+  renderComponent = ({ getPrefixCls }: ConfigConsumerProps) => {
+    const { value, defaultValue, disabled, allowClear } = this.props;
+    const { prefixCls: customizePrefixCls } = this.props;
+    const prefixCls = getPrefixCls('input', customizePrefixCls);
+    return (
+      <ClearableInput
+        prefixCls={prefixCls}
+        inputType="text"
+        value={value}
+        defaultValue={defaultValue}
+        allowClear={allowClear}
+        disabled={disabled}
+        element={this.renderTextArea(prefixCls)}
+        ref={this.saveClearableInput}
+        focus={this.focus}
+        getRef={this.getRef}
+      />
     );
   };
 
   render() {
-    return this.renderTextArea();
+    return <ConfigConsumer>{this.renderComponent}</ConfigConsumer>;
   }
 }
 

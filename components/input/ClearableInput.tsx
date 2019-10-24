@@ -3,8 +3,8 @@ import { polyfill } from 'react-lifecycles-compat';
 import classNames from 'classnames';
 import Icon from '../icon';
 import { tuple } from '../_util/type';
-import Input, { InputProps } from './Input';
-import TextArea, { TextAreaProps } from './TextArea';
+import { InputProps, InputSizes } from './Input';
+import { TextAreaProps } from './TextArea';
 
 const ClearableInputType = tuple('text', 'input');
 
@@ -26,25 +26,30 @@ interface ClearableInputProps {
   value?: any;
   defaultValue?: any;
   allowClear?: boolean;
-  children: React.ReactElement<TextArea | Input>;
-  target: HTMLTextAreaElement | HTMLInputElement;
+  element: React.ReactElement<any>;
+  getRef: Function;
   onChange?: Function;
   resizeTextarea?: Function;
   disabled?: boolean;
   className?: string;
   style?: object;
+  size?: (typeof InputSizes)[number];
+  prefix?: React.ReactNode;
+  addonBefore?: React.ReactNode;
+  addonAfter?: React.ReactNode;
+  focus: Function;
 }
 
 export interface ClearableInputState {
-  value: any;
+  currentValue: any;
 }
 
 class ClearableInput extends React.Component<ClearableInputProps, ClearableInputState> {
   constructor(props: ClearableInputProps) {
     super(props);
-    const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
+    const currentValue = typeof props.value === 'undefined' ? props.defaultValue : props.value;
     this.state = {
-      value,
+      currentValue,
     };
   }
 
@@ -64,43 +69,48 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
       | React.MouseEvent<HTMLElement, MouseEvent>,
     callback?: () => void,
   ) {
-    if (!('value' in this.props)) {
-      this.setState({ value }, callback);
-    }
-    const { onChange, target } = this.props;
+    this.setState({ currentValue: value }, callback);
+    const { onChange, getRef } = this.props;
+    console.log('target');
     if (onChange) {
       let event = e;
       if (e.type === 'click') {
         // click clear icon
         event = Object.create(e);
-        event.target = target;
-        event.currentTarget = target;
-        const originalInputValue = target.value;
+        event.target = getRef();
+        event.currentTarget = getRef();
+        const originalInputValue = getRef().value;
         // change target ref value cause e.target.value should be '' when clear input
-        target.value = '';
+        getRef().value = '';
         onChange(event);
         // reset target ref value
-        target.value = originalInputValue;
+        getRef().value = originalInputValue;
         return;
       }
-      onChange();
+      onChange(event);
     }
   }
 
   handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const { inputType, target, resizeTextarea } = this.props;
+    const { inputType, focus, resizeTextarea } = this.props;
     this.setValue('', e, () => {
       if (inputType === ClearableInputType[0] && resizeTextarea) {
         resizeTextarea();
       }
-      target.focus();
+      focus();
     });
   };
 
   renderClearIcon(prefixCls: string) {
     const { allowClear, disabled, inputType } = this.props;
-    const { value } = this.state;
-    if (!allowClear || disabled || value === undefined || value === null || value === '') {
+    const { currentValue } = this.state;
+    if (
+      !allowClear ||
+      disabled ||
+      currentValue === undefined ||
+      currentValue === null ||
+      currentValue === ''
+    ) {
       return null;
     }
     const className =
@@ -118,22 +128,18 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
     );
   }
 
-  renderTextAreaWithClearIcon() {
-    const { prefixCls, className, style, children } = this.props;
-    const affixWrapperCls = classNames(className, `${prefixCls}-affix-wrapper`);
-    return (
-      <span className={affixWrapperCls} style={style}>
-        {React.cloneElement(children, {
-          style: null,
-        })}
-        {this.renderSuffix(prefixCls)}
-      </span>
-    );
+  renderClearableInput() {
+    const { prefixCls, inputType, element } = this.props;
+    if (inputType === ClearableInputType[0]) {
+      return this.renderTextAreaWithClearIcon(prefixCls, element);
+    }
+    return this.renderInputWithLabel(prefixCls, this.renderLabeledIcon(prefixCls, element));
   }
 
   renderSuffix(prefixCls: string) {
-    const { suffix, allowClear } = this.props as ClearableInputProps;
+    const { suffix, allowClear } = this.props;
     if (suffix || allowClear) {
+      console.log('fuckyea');
       return (
         <span className={`${prefixCls}-suffix`}>
           {this.renderClearIcon(prefixCls)}
@@ -144,8 +150,101 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
     return null;
   }
 
+  getInputClassName(prefixCls: string) {
+    const { size, disabled } = this.props;
+    return classNames(prefixCls, {
+      [`${prefixCls}-sm`]: size === 'small',
+      [`${prefixCls}-lg`]: size === 'large',
+      [`${prefixCls}-disabled`]: disabled,
+    });
+  }
+
+  renderLabeledIcon(prefixCls: string, element: React.ReactElement<any>) {
+    let { currentValue } = this.state;
+    const props = this.props as ClearableInputProps;
+    const suffix = this.renderSuffix(prefixCls);
+    currentValue = fixControlledValue(currentValue);
+    if (!hasPrefixSuffix(props as ClearableInputProps)) {
+      return element;
+    }
+
+    const prefix = props.prefix ? (
+      <span className={`${prefixCls}-prefix`}>{props.prefix}</span>
+    ) : null;
+
+    const affixWrapperCls = classNames(props.className, `${prefixCls}-affix-wrapper`, {
+      [`${prefixCls}-affix-wrapper-sm`]: props.size === 'small',
+      [`${prefixCls}-affix-wrapper-lg`]: props.size === 'large',
+      [`${prefixCls}-affix-wrapper-with-clear-btn`]:
+        props.suffix && props.allowClear && this.state.currentValue,
+    });
+    return (
+      <span className={affixWrapperCls} style={props.style}>
+        {prefix}
+        {React.cloneElement(element, {
+          style: null,
+          value: currentValue,
+          className: this.getInputClassName(prefixCls),
+        })}
+        {suffix}
+      </span>
+    );
+  }
+
+  renderInputWithLabel(prefixCls: string, labeledElement: React.ReactElement<any>) {
+    const { addonBefore, addonAfter, style, size, className } = this.props;
+    // Not wrap when there is not addons
+    if (!addonBefore && !addonAfter) {
+      return labeledElement;
+    }
+
+    const wrapperClassName = `${prefixCls}-group`;
+    const addonClassName = `${wrapperClassName}-addon`;
+    const addonBeforeNode = addonBefore ? (
+      <span className={addonClassName}>{addonBefore}</span>
+    ) : null;
+    const addonAfterNode = addonAfter ? <span className={addonClassName}>{addonAfter}</span> : null;
+
+    const mergedWrapperClassName = classNames(`${prefixCls}-wrapper`, {
+      [wrapperClassName]: addonBefore || addonAfter,
+    });
+
+    const mergedGroupClassName = classNames(className, `${prefixCls}-group-wrapper`, {
+      [`${prefixCls}-group-wrapper-sm`]: size === 'small',
+      [`${prefixCls}-group-wrapper-lg`]: size === 'large',
+    });
+
+    // Need another wrapper for changing display:table to display:inline-block
+    // and put style prop in wrapper
+    return (
+      <span className={mergedGroupClassName} style={style}>
+        <span className={mergedWrapperClassName}>
+          {addonBeforeNode}
+          {React.cloneElement(labeledElement, { style: null })}
+          {addonAfterNode}
+        </span>
+      </span>
+    );
+  }
+
+  renderTextAreaWithClearIcon(prefixCls: string, element: React.ReactElement<any>) {
+    let { currentValue } = this.state;
+    const { className, style } = this.props;
+    const affixWrapperCls = classNames(className, `${prefixCls}-affix-wrapper`);
+    currentValue = fixControlledValue(currentValue);
+    return (
+      <span className={affixWrapperCls} style={style}>
+        {React.cloneElement(element, {
+          style: null,
+          value: currentValue,
+        })}
+        {this.renderSuffix(prefixCls)}
+      </span>
+    );
+  }
+
   render() {
-    return this.renderTextAreaWithClearIcon();
+    return this.renderClearableInput();
   }
 }
 
