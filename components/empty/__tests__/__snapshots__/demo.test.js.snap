@@ -200,14 +200,18 @@ exports[`renders ./components/empty/demo/config-provider.md correctly 1`] = `
       <span
         class="ant-cascader-picker-label"
       />
-      <input
-        autocomplete="off"
-        class="ant-input ant-cascader-input "
-        placeholder="Please select"
-        tabindex="-1"
-        type="text"
-        value=""
-      />
+      <span
+        class="ant-cascader-input  ant-input-affix-wrapper"
+      >
+        <input
+          autocomplete="off"
+          class="ant-input"
+          placeholder="Please select"
+          tabindex="-1"
+          type="text"
+          value=""
+        />
+      </span>
       <i
         aria-label="icon: down"
         class="anticon anticon-down ant-cascader-picker-arrow"

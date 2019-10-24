@@ -36,15 +36,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-0"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-0"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -77,15 +81,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-1"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-1"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -118,15 +126,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-2"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-2"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -159,15 +171,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-3"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-3"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -200,15 +216,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-4"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-4"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -241,15 +261,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-5"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-5"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -282,15 +306,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-6"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-6"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -323,15 +351,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-7"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-7"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -364,15 +396,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-8"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-8"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -405,15 +441,19 @@ exports[`renders ./components/form/demo/advanced-search.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  data-__field="[object Object]"
-                  data-__meta="[object Object]"
-                  id="advanced_search_field-9"
-                  placeholder="placeholder"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    data-__field="[object Object]"
+                    data-__meta="[object Object]"
+                    id="advanced_search_field-9"
+                    placeholder="placeholder"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -506,14 +546,18 @@ exports[`renders ./components/form/demo/coordinated.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            data-__field="[object Object]"
-            data-__meta="[object Object]"
-            id="coordinated_note"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              data-__field="[object Object]"
+              data-__meta="[object Object]"
+              id="coordinated_note"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
       </div>
     </div>
@@ -654,12 +698,15 @@ exports[`renders ./components/form/demo/customized-form-controls.md correctly 1`
           class="ant-form-item-children"
         >
           <span>
-            <input
-              class="ant-input"
-              style="width:65%;margin-right:3%"
-              type="text"
-              value="0"
-            />
+            <span
+              class="ant-input-affix-wrapper"
+            >
+              <input
+                class="ant-input"
+                type="text"
+                value="0"
+              />
+            </span>
             <div
               class="ant-select ant-select-enabled"
               style="width:32%"
@@ -847,15 +894,19 @@ exports[`renders ./components/form/demo/dynamic-rule.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            data-__field="[object Object]"
-            data-__meta="[object Object]"
-            id="dynamic_rule_username"
-            placeholder="Please input your name"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              data-__field="[object Object]"
+              data-__meta="[object Object]"
+              id="dynamic_rule_username"
+              placeholder="Please input your name"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
       </div>
     </div>
@@ -883,15 +934,19 @@ exports[`renders ./components/form/demo/dynamic-rule.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            data-__field="[object Object]"
-            data-__meta="[object Object]"
-            id="dynamic_rule_nickname"
-            placeholder="Please input your nickname"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              data-__field="[object Object]"
+              data-__meta="[object Object]"
+              id="dynamic_rule_nickname"
+              placeholder="Please input your nickname"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
       </div>
     </div>
@@ -998,14 +1053,18 @@ exports[`renders ./components/form/demo/global-state.md correctly 1`] = `
           <span
             class="ant-form-item-children"
           >
-            <input
-              class="ant-input"
-              data-__field="[object Object]"
-              data-__meta="[object Object]"
-              id="global_state_username"
-              type="text"
-              value="benjycui"
-            />
+            <span
+              class="ant-input-affix-wrapper"
+            >
+              <input
+                class="ant-input"
+                data-__field="[object Object]"
+                data-__meta="[object Object]"
+                id="global_state_username"
+                type="text"
+                value="benjycui"
+              />
+            </span>
           </span>
         </div>
       </div>
@@ -1275,12 +1334,16 @@ exports[`renders ./components/form/demo/layout.md correctly 1`] = `
           <span
             class="ant-form-item-children"
           >
-            <input
-              class="ant-input"
-              placeholder="input placeholder"
-              type="text"
-              value=""
-            />
+            <span
+              class="ant-input-affix-wrapper"
+            >
+              <input
+                class="ant-input"
+                placeholder="input placeholder"
+                type="text"
+                value=""
+              />
+            </span>
           </span>
         </div>
       </div>
@@ -1307,12 +1370,16 @@ exports[`renders ./components/form/demo/layout.md correctly 1`] = `
           <span
             class="ant-form-item-children"
           >
-            <input
-              class="ant-input"
-              placeholder="input placeholder"
-              type="text"
-              value=""
-            />
+            <span
+              class="ant-input-affix-wrapper"
+            >
+              <input
+                class="ant-input"
+                placeholder="input placeholder"
+                type="text"
+                value=""
+              />
+            </span>
           </span>
         </div>
       </div>
@@ -1543,14 +1610,18 @@ exports[`renders ./components/form/demo/register.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            data-__field="[object Object]"
-            data-__meta="[object Object]"
-            id="register_email"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              data-__field="[object Object]"
+              data-__meta="[object Object]"
+              id="register_email"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
       </div>
     </div>
@@ -1736,14 +1807,18 @@ exports[`renders ./components/form/demo/register.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            data-__field="[object Object]"
-            data-__meta="[object Object]"
-            id="register_nickname"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              data-__field="[object Object]"
+              data-__meta="[object Object]"
+              id="register_nickname"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
       </div>
     </div>
@@ -1780,17 +1855,21 @@ exports[`renders ./components/form/demo/register.md correctly 1`] = `
             >
               Zhejiang / Hangzhou / West Lake
             </span>
-            <input
-              autocomplete="off"
-              class="ant-input ant-cascader-input "
-              data-__field="[object Object]"
-              data-__meta="[object Object]"
-              id="register_residence"
-              readonly=""
-              tabindex="-1"
-              type="text"
-              value=""
-            />
+            <span
+              class="ant-cascader-input  ant-input-affix-wrapper"
+            >
+              <input
+                autocomplete="off"
+                class="ant-input"
+                data-__field="[object Object]"
+                data-__meta="[object Object]"
+                id="register_residence"
+                readonly=""
+                tabindex="-1"
+                type="text"
+                value=""
+              />
+            </span>
             <i
               aria-label="icon: close-circle"
               class="anticon anticon-close-circle ant-cascader-picker-clear"
@@ -1860,7 +1939,6 @@ exports[`renders ./components/form/demo/register.md correctly 1`] = `
         >
           <span
             class="ant-input-group-wrapper"
-            style="width:100%"
           >
             <span
               class="ant-input-wrapper ant-input-group"
@@ -1924,14 +2002,18 @@ exports[`renders ./components/form/demo/register.md correctly 1`] = `
                   </div>
                 </div>
               </span>
-              <input
-                class="ant-input"
-                data-__field="[object Object]"
-                data-__meta="[object Object]"
-                id="register_phone"
-                type="text"
-                value=""
-              />
+              <span
+                class="ant-input-affix-wrapper"
+              >
+                <input
+                  class="ant-input"
+                  data-__field="[object Object]"
+                  data-__meta="[object Object]"
+                  id="register_phone"
+                  type="text"
+                  value=""
+                />
+              </span>
             </span>
           </span>
         </span>
@@ -1993,11 +2075,15 @@ exports[`renders ./components/form/demo/register.md correctly 1`] = `
                     <div
                       class="ant-select-search__field__wrap"
                     >
-                      <input
-                        class="ant-input ant-select-search__field"
-                        type="text"
-                        value=""
-                      />
+                      <span
+                        class="ant-select-search__field ant-input-affix-wrapper"
+                      >
+                        <input
+                          class="ant-input"
+                          type="text"
+                          value=""
+                        />
+                      </span>
                       <span
                         class="ant-select-search__field__mirror"
                       >
@@ -2069,14 +2155,18 @@ exports[`renders ./components/form/demo/register.md correctly 1`] = `
               class="ant-col ant-col-12"
               style="padding-left:4px;padding-right:4px"
             >
-              <input
-                class="ant-input"
-                data-__field="[object Object]"
-                data-__meta="[object Object]"
-                id="register_captcha"
-                type="text"
-                value=""
-              />
+              <span
+                class="ant-input-affix-wrapper"
+              >
+                <input
+                  class="ant-input"
+                  data-__field="[object Object]"
+                  data-__meta="[object Object]"
+                  id="register_captcha"
+                  type="text"
+                  value=""
+                />
+              </span>
             </div>
             <div
               class="ant-col ant-col-12"
@@ -2213,11 +2303,15 @@ exports[`renders ./components/form/demo/style-check-debug.md correctly 1`] = `
               <span
                 class="ant-form-item-children"
               >
-                <input
-                  class="ant-input"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    type="text"
+                    value=""
+                  />
+                </span>
               </span>
             </div>
           </div>
@@ -2385,14 +2479,14 @@ exports[`renders ./components/form/demo/style-check-debug.md correctly 1`] = `
                     </span>
                   </div>
                   <div
+                    aria-valuemin="-9007199254740991"
                     class="ant-input-number-input-wrap"
+                    role="spinbutton"
                   >
                     <input
-                      aria-valuemin="-9007199254740991"
                       autocomplete="off"
                       class="ant-input-number-input"
                       min="-9007199254740991"
-                      role="spinbutton"
                       step="1"
                       value=""
                     />
@@ -3244,12 +3338,13 @@ exports[`renders ./components/form/demo/validate-other.md correctly 1`] = `
               </span>
             </div>
             <div
+              aria-valuemax="10"
+              aria-valuemin="1"
+              aria-valuenow="3"
               class="ant-input-number-input-wrap"
+              role="spinbutton"
             >
               <input
-                aria-valuemax="10"
-                aria-valuemin="1"
-                aria-valuenow="3"
                 autocomplete="off"
                 class="ant-input-number-input"
                 data-__field="[object Object]"
@@ -3257,7 +3352,6 @@ exports[`renders ./components/form/demo/validate-other.md correctly 1`] = `
                 id="validate_other_input-number"
                 max="10"
                 min="1"
-                role="spinbutton"
                 step="1"
                 value="3"
               />
@@ -4218,13 +4312,17 @@ exports[`renders ./components/form/demo/validate-static.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            id="error"
-            placeholder="unavailable choice"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              id="error"
+              placeholder="unavailable choice"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
         <div
           class="ant-form-explain"
@@ -4256,13 +4354,17 @@ exports[`renders ./components/form/demo/validate-static.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            id="warning"
-            placeholder="Warning"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              id="warning"
+              placeholder="Warning"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
       </div>
     </div>
@@ -4289,13 +4391,17 @@ exports[`renders ./components/form/demo/validate-static.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            id="validating"
-            placeholder="I'm the content is being validated"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              id="validating"
+              placeholder="I'm the content is being validated"
+              type="text"
+              value=""
+            />
+          </span>
           <span
             class="ant-form-item-children-icon"
           >
@@ -4350,13 +4456,17 @@ exports[`renders ./components/form/demo/validate-static.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            id="success"
-            placeholder="I'm the content"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              id="success"
+              placeholder="I'm the content"
+              type="text"
+              value=""
+            />
+          </span>
           <span
             class="ant-form-item-children-icon"
           >
@@ -4406,13 +4516,17 @@ exports[`renders ./components/form/demo/validate-static.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            id="warning2"
-            placeholder="Warning"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              id="warning2"
+              placeholder="Warning"
+              type="text"
+              value=""
+            />
+          </span>
           <span
             class="ant-form-item-children-icon"
           >
@@ -4462,13 +4576,17 @@ exports[`renders ./components/form/demo/validate-static.md correctly 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            id="error2"
-            placeholder="unavailable choice"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              id="error2"
+              placeholder="unavailable choice"
+              type="text"
+              value=""
+            />
+          </span>
           <span
             class="ant-form-item-children-icon"
           >
@@ -4798,14 +4916,18 @@ exports[`renders ./components/form/demo/validate-static.md correctly 1`] = `
             <span
               class="ant-cascader-picker-label"
             />
-            <input
-              autocomplete="off"
-              class="ant-input ant-cascader-input "
-              readonly=""
-              tabindex="-1"
-              type="text"
-              value=""
-            />
+            <span
+              class="ant-cascader-input  ant-input-affix-wrapper"
+            >
+              <input
+                autocomplete="off"
+                class="ant-input"
+                readonly=""
+                tabindex="-1"
+                type="text"
+                value=""
+              />
+            </span>
             <i
               aria-label="icon: close-circle"
               class="anticon anticon-close-circle ant-cascader-picker-clear"
@@ -5096,14 +5218,14 @@ exports[`renders ./components/form/demo/validate-static.md correctly 1`] = `
               </span>
             </div>
             <div
+              aria-valuemin="-9007199254740991"
               class="ant-input-number-input-wrap"
+              role="spinbutton"
             >
               <input
-                aria-valuemin="-9007199254740991"
                 autocomplete="off"
                 class="ant-input-number-input"
                 min="-9007199254740991"
-                role="spinbutton"
                 step="1"
                 value=""
               />
@@ -5227,17 +5349,17 @@ exports[`renders ./components/form/demo/without-form-create.md correctly 1`] = `
               </span>
             </div>
             <div
+              aria-valuemax="12"
+              aria-valuemin="8"
+              aria-valuenow="11"
               class="ant-input-number-input-wrap"
+              role="spinbutton"
             >
               <input
-                aria-valuemax="12"
-                aria-valuemin="8"
-                aria-valuenow="11"
                 autocomplete="off"
                 class="ant-input-number-input"
                 max="12"
                 min="8"
-                role="spinbutton"
                 step="1"
                 value="11"
               />

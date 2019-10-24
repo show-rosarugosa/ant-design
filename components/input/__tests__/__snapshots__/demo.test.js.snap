@@ -16,11 +16,15 @@ exports[`renders ./components/input/demo/addon.md correctly 1`] = `
         >
           Http://
         </span>
-        <input
-          class="ant-input"
-          type="text"
-          value="mysite"
-        />
+        <span
+          class="ant-input-affix-wrapper"
+        >
+          <input
+            class="ant-input"
+            type="text"
+            value="mysite"
+          />
+        </span>
         <span
           class="ant-input-group-addon"
         >
@@ -94,11 +98,15 @@ exports[`renders ./components/input/demo/addon.md correctly 1`] = `
             </div>
           </div>
         </span>
-        <input
-          class="ant-input"
-          type="text"
-          value="mysite"
-        />
+        <span
+          class="ant-input-affix-wrapper"
+        >
+          <input
+            class="ant-input"
+            type="text"
+            value="mysite"
+          />
+        </span>
         <span
           class="ant-input-group-addon"
         >
@@ -167,11 +175,15 @@ exports[`renders ./components/input/demo/addon.md correctly 1`] = `
       <span
         class="ant-input-wrapper ant-input-group"
       >
-        <input
-          class="ant-input"
-          type="text"
-          value="mysite"
-        />
+        <span
+          class="ant-input-affix-wrapper"
+        >
+          <input
+            class="ant-input"
+            type="text"
+            value="mysite"
+          />
+        </span>
         <span
           class="ant-input-group-addon"
         >
@@ -213,7 +225,6 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
   </div>
   <span
     class="ant-input-affix-wrapper"
-    style="width:100px"
   >
     <textarea
       class="ant-input"
@@ -228,12 +239,15 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
       Button
     </span>
   </button>
-  <input
-    class="ant-input"
-    style="width:100px"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-input-affix-wrapper"
+  >
+    <input
+      class="ant-input"
+      type="text"
+      value=""
+    />
+  </span>
   <span
     class="ant-typography"
   >
@@ -269,7 +283,6 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
   </span>
   <span
     class="ant-input-affix-wrapper"
-    style="width:100px"
   >
     <span
       class="ant-input-prefix"
@@ -289,7 +302,6 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
   </span>
   <span
     class="ant-input-group-wrapper"
-    style="width:100px"
   >
     <span
       class="ant-input-wrapper ant-input-group"
@@ -299,11 +311,15 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
       >
         1
       </span>
-      <input
-        class="ant-input"
-        type="text"
-        value=""
-      />
+      <span
+        class="ant-input-affix-wrapper"
+      >
+        <input
+          class="ant-input"
+          type="text"
+          value=""
+        />
+      </span>
       <span
         class="ant-input-group-addon"
       >
@@ -374,14 +390,14 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
       </span>
     </div>
     <div
+      aria-valuemin="-9007199254740991"
       class="ant-input-number-input-wrap"
+      role="spinbutton"
     >
       <input
-        aria-valuemin="-9007199254740991"
         autocomplete="off"
         class="ant-input-number-input"
         min="-9007199254740991"
-        role="spinbutton"
         step="1"
         value=""
       />
@@ -613,14 +629,18 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
     >
       Zhejiang / Hangzhou / West Lake
     </span>
-    <input
-      autocomplete="off"
-      class="ant-input ant-cascader-input "
-      readonly=""
-      tabindex="-1"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-cascader-input  ant-input-affix-wrapper"
+    >
+      <input
+        autocomplete="off"
+        class="ant-input"
+        readonly=""
+        tabindex="-1"
+        type="text"
+        value=""
+      />
+    </span>
     <i
       aria-label="icon: close-circle"
       class="anticon anticon-close-circle ant-cascader-picker-clear"
@@ -812,11 +832,15 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
             <div
               class="ant-select-search__field__wrap"
             >
-              <input
-                class="ant-input ant-select-search__field"
-                type="text"
-                value=""
-              />
+              <span
+                class="ant-select-search__field ant-input-affix-wrapper"
+              >
+                <input
+                  class="ant-input"
+                  type="text"
+                  value=""
+                />
+              </span>
               <span
                 class="ant-select-search__field__mirror"
               >
@@ -920,12 +944,16 @@ exports[`renders ./components/input/demo/autosize-textarea.md correctly 1`] = `
 `;
 
 exports[`renders ./components/input/demo/basic.md correctly 1`] = `
-<input
-  class="ant-input"
-  placeholder="Basic usage"
-  type="text"
-  value=""
-/>
+<span
+  class="ant-input-affix-wrapper"
+>
+  <input
+    class="ant-input"
+    placeholder="Basic usage"
+    type="text"
+    value=""
+  />
+</span>
 `;
 
 exports[`renders ./components/input/demo/group.md correctly 1`] = `
@@ -941,21 +969,29 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
         class="ant-col ant-col-5"
         style="padding-left:4px;padding-right:4px"
       >
-        <input
-          class="ant-input"
-          type="text"
-          value="0571"
-        />
+        <span
+          class="ant-input-affix-wrapper"
+        >
+          <input
+            class="ant-input"
+            type="text"
+            value="0571"
+          />
+        </span>
       </div>
       <div
         class="ant-col ant-col-8"
         style="padding-left:4px;padding-right:4px"
       >
-        <input
-          class="ant-input"
-          type="text"
-          value="26888888"
-        />
+        <span
+          class="ant-input-affix-wrapper"
+        >
+          <input
+            class="ant-input"
+            type="text"
+            value="26888888"
+          />
+        </span>
       </div>
     </div>
   </span>
@@ -963,18 +999,24 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
   <span
     class="ant-input-group ant-input-group-compact"
   >
-    <input
-      class="ant-input"
-      style="width:20%"
-      type="text"
-      value="0571"
-    />
-    <input
-      class="ant-input"
-      style="width:30%"
-      type="text"
-      value="26888888"
-    />
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value="0571"
+      />
+    </span>
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value="26888888"
+      />
+    </span>
   </span>
   <br />
   <span
@@ -1031,12 +1073,15 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
         </span>
       </div>
     </div>
-    <input
-      class="ant-input"
-      style="width:50%"
-      type="text"
-      value="Xihu District, Hangzhou"
-    />
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value="Xihu District, Hangzhou"
+      />
+    </span>
   </span>
   <br />
   <span
@@ -1093,12 +1138,15 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
         </span>
       </div>
     </div>
-    <input
-      class="ant-input"
-      style="width:50%"
-      type="text"
-      value="input content"
-    />
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value="input content"
+      />
+    </span>
     <div
       class="ant-input-number"
     >
@@ -1161,14 +1209,14 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
         </span>
       </div>
       <div
+        aria-valuemin="-9007199254740991"
         class="ant-input-number-input-wrap"
+        role="spinbutton"
       >
         <input
-          aria-valuemin="-9007199254740991"
           autocomplete="off"
           class="ant-input-number-input"
           min="-9007199254740991"
-          role="spinbutton"
           step="1"
           value=""
         />
@@ -1179,12 +1227,15 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
   <span
     class="ant-input-group ant-input-group-compact"
   >
-    <input
-      class="ant-input"
-      style="width:50%"
-      type="text"
-      value="input content"
-    />
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value="input content"
+      />
+    </span>
     <span
       class="ant-calendar-picker"
       style="width:50%"
@@ -1380,28 +1431,37 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
         </span>
       </div>
     </div>
-    <input
-      class="ant-input"
-      placeholder="Minimum"
-      style="width:100px;text-align:center"
-      type="text"
-      value=""
-    />
-    <input
-      class="ant-input ant-input-disabled"
-      disabled=""
-      placeholder="~"
-      style="width:30px;border-left:0;pointer-events:none;background-color:#fff"
-      type="text"
-      value=""
-    />
-    <input
-      class="ant-input"
-      placeholder="Maximum"
-      style="width:100px;text-align:center;border-left:0"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        placeholder="Minimum"
+        type="text"
+        value=""
+      />
+    </span>
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input ant-input-disabled"
+        disabled=""
+        placeholder="~"
+        type="text"
+        value=""
+      />
+    </span>
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        placeholder="Maximum"
+        type="text"
+        value=""
+      />
+    </span>
   </span>
   <br />
   <span
@@ -1488,11 +1548,15 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
               <div
                 class="ant-select-search__field__wrap"
               >
-                <input
-                  class="ant-input ant-select-search__field"
-                  type="text"
-                  value=""
-                />
+                <span
+                  class="ant-select-search__field ant-input-affix-wrapper"
+                >
+                  <input
+                    class="ant-input"
+                    type="text"
+                    value=""
+                  />
+                </span>
                 <span
                   class="ant-select-search__field__mirror"
                 >
@@ -1594,15 +1658,19 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
       <span
         class="ant-cascader-picker-label"
       />
-      <input
-        autocomplete="off"
-        class="ant-input ant-cascader-input "
-        placeholder="Select Address"
-        readonly=""
-        tabindex="-1"
-        type="text"
-        value=""
-      />
+      <span
+        class="ant-cascader-input  ant-input-affix-wrapper"
+      >
+        <input
+          autocomplete="off"
+          class="ant-input"
+          placeholder="Select Address"
+          readonly=""
+          tabindex="-1"
+          type="text"
+          value=""
+        />
+      </span>
       <i
         aria-label="icon: down"
         class="anticon anticon-down ant-cascader-picker-arrow"
@@ -1759,7 +1827,6 @@ exports[`renders ./components/input/demo/search-input.md correctly 1`] = `
 <div>
   <span
     class="ant-input-search ant-input-affix-wrapper"
-    style="width:200px"
   >
     <input
       class="ant-input"
@@ -1800,12 +1867,16 @@ exports[`renders ./components/input/demo/search-input.md correctly 1`] = `
     <span
       class="ant-input-wrapper ant-input-group"
     >
-      <input
-        class="ant-input"
-        placeholder="input search text"
-        type="text"
-        value=""
-      />
+      <span
+        class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper"
+      >
+        <input
+          class="ant-input"
+          placeholder="input search text"
+          type="text"
+          value=""
+        />
+      </span>
       <span
         class="ant-input-group-addon"
       >
@@ -1844,12 +1915,16 @@ exports[`renders ./components/input/demo/search-input.md correctly 1`] = `
     <span
       class="ant-input-wrapper ant-input-group"
     >
-      <input
-        class="ant-input ant-input-lg"
-        placeholder="input search text"
-        type="text"
-        value=""
-      />
+      <span
+        class="ant-input-search ant-input-search-enter-button ant-input-search-large ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+      >
+        <input
+          class="ant-input ant-input-lg"
+          placeholder="input search text"
+          type="text"
+          value=""
+        />
+      </span>
       <span
         class="ant-input-group-addon"
       >
@@ -1910,12 +1985,16 @@ exports[`renders ./components/input/demo/search-input-loading.md correctly 1`] =
     <span
       class="ant-input-wrapper ant-input-group"
     >
-      <input
-        class="ant-input"
-        placeholder="input search loading with enterButton"
-        type="text"
-        value=""
-      />
+      <span
+        class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper"
+      >
+        <input
+          class="ant-input"
+          placeholder="input search loading with enterButton"
+          type="text"
+          value=""
+        />
+      </span>
       <span
         class="ant-input-group-addon"
       >
@@ -1953,24 +2032,36 @@ exports[`renders ./components/input/demo/size.md correctly 1`] = `
 <div
   class="example-input"
 >
-  <input
-    class="ant-input ant-input-lg"
-    placeholder="large size"
-    type="text"
-    value=""
-  />
-  <input
-    class="ant-input"
-    placeholder="default size"
-    type="text"
-    value=""
-  />
-  <input
-    class="ant-input ant-input-sm"
-    placeholder="small size"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-input-affix-wrapper ant-input-affix-wrapper-lg"
+  >
+    <input
+      class="ant-input ant-input-lg"
+      placeholder="large size"
+      type="text"
+      value=""
+    />
+  </span>
+  <span
+    class="ant-input-affix-wrapper"
+  >
+    <input
+      class="ant-input"
+      placeholder="default size"
+      type="text"
+      value=""
+    />
+  </span>
+  <span
+    class="ant-input-affix-wrapper ant-input-affix-wrapper-sm"
+  >
+    <input
+      class="ant-input ant-input-sm"
+      placeholder="small size"
+      type="text"
+      value=""
+    />
+  </span>
 </div>
 `;
 
@@ -2010,12 +2101,15 @@ exports[`renders ./components/input/demo/textarea-resize.md correctly 1`] = `
 `;
 
 exports[`renders ./components/input/demo/tooltip.md correctly 1`] = `
-<input
-  class="ant-input"
-  maxlength="25"
-  placeholder="Input a number"
-  style="width:120px"
-  type="text"
-  value=""
-/>
+<span
+  class="ant-input-affix-wrapper"
+>
+  <input
+    class="ant-input"
+    maxlength="25"
+    placeholder="Input a number"
+    type="text"
+    value=""
+  />
+</span>
 `;

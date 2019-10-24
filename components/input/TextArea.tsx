@@ -20,12 +20,25 @@ class TextArea extends React.Component<TextAreaProps> {
 
   clearableInput: ClearableInput;
 
+  static getDerivedStateFromProps(nextProps: TextAreaProps) {
+    if ('value' in nextProps) {
+      return {
+        value: nextProps.value,
+      };
+    }
+    return null;
+  }
+
   focus() {
     this.resizableTextArea.textArea.focus();
   }
 
   blur() {
     this.resizableTextArea.textArea.blur();
+  }
+
+  resizeTextarea() {
+    this.resizableTextArea.renderTextArea();
   }
 
   saveTextArea = (resizableTextArea: ResizableTextArea) => {
@@ -37,7 +50,7 @@ class TextArea extends React.Component<TextAreaProps> {
   };
 
   handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    this.clearableInput.setValue(e.target.value, e, () => {
+    this.clearableInput.setValue(e.target.value, this.resizableTextArea.textArea, e, () => {
       this.resizableTextArea.resizeTextarea();
     });
   };
@@ -65,8 +78,11 @@ class TextArea extends React.Component<TextAreaProps> {
     );
   };
 
-  getRef = () => {
-    return this.resizableTextArea.textArea;
+  handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    this.clearableInput.setValue('', this.resizableTextArea.textArea, e, () => {
+      this.resizableTextArea.renderTextArea();
+      this.focus();
+    });
   };
 
   renderComponent = ({ getPrefixCls }: ConfigConsumerProps) => {
@@ -84,7 +100,7 @@ class TextArea extends React.Component<TextAreaProps> {
         element={this.renderTextArea(prefixCls)}
         ref={this.saveClearableInput}
         focus={this.focus}
-        getRef={this.getRef}
+        handleReset={this.handleReset}
       />
     );
   };

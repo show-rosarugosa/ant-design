@@ -58,11 +58,15 @@ exports[`Input.Search should support addonAfter 2`] = `
   <span
     class="ant-input-wrapper ant-input-group"
   >
-    <input
-      class="ant-input"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="ant-input-group-addon"
     >
@@ -208,11 +212,15 @@ exports[`Input.Search should support custom Button 1`] = `
   <span
     class="ant-input-wrapper ant-input-group"
   >
-    <input
-      class="ant-input"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="ant-input-group-addon"
     >
@@ -236,11 +244,15 @@ exports[`Input.Search should support custom button 1`] = `
   <span
     class="ant-input-wrapper ant-input-group"
   >
-    <input
-      class="ant-input"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="ant-input-group-addon"
     >
@@ -261,11 +273,15 @@ exports[`Input.Search should support invalid addonAfter 1`] = `
   <span
     class="ant-input-wrapper ant-input-group"
   >
-    <input
-      class="ant-input"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="ant-input-group-addon"
     >
@@ -376,11 +392,15 @@ exports[`Input.Search should support loading 2`] = `
   <span
     class="ant-input-wrapper ant-input-group"
   >
-    <input
-      class="ant-input"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-input-search ant-input-search-enter-button ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="ant-input-group-addon"
     >

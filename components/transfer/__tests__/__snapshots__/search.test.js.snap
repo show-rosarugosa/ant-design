@@ -13,20 +13,36 @@ exports[`Transfer.Search should show cross icon when input value exists 1`] = `
       value=""
     >
       <ClearableInput
+        element={
+          <input
+            className="ant-input"
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder=""
+            type="text"
+            value=""
+          />
+        }
+        focus={[Function]}
+        handleReset={[Function]}
         inputType="input"
         onChange={[Function]}
-        placeholder=""
-        type="text"
+        prefixCls="ant-input"
         value=""
       >
-        <input
-          className="ant-input"
-          onChange={[Function]}
-          onKeyDown={[Function]}
-          placeholder=""
-          type="text"
-          value=""
-        />
+        <span
+          className="ant-input-affix-wrapper"
+        >
+          <input
+            className="ant-input"
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder=""
+            style={null}
+            type="text"
+            value=""
+          />
+        </span>
       </ClearableInput>
     </Input>
     <span
@@ -84,20 +100,36 @@ exports[`Transfer.Search should show cross icon when input value exists 2`] = `
       value="a"
     >
       <ClearableInput
+        element={
+          <input
+            className="ant-input"
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder=""
+            type="text"
+            value="a"
+          />
+        }
+        focus={[Function]}
+        handleReset={[Function]}
         inputType="input"
         onChange={[Function]}
-        placeholder=""
-        type="text"
+        prefixCls="ant-input"
         value="a"
       >
-        <input
-          className="ant-input"
-          onChange={[Function]}
-          onKeyDown={[Function]}
-          placeholder=""
-          type="text"
-          value="a"
-        />
+        <span
+          className="ant-input-affix-wrapper"
+        >
+          <input
+            className="ant-input"
+            onChange={[Function]}
+            onKeyDown={[Function]}
+            placeholder=""
+            style={null}
+            type="text"
+            value=""
+          />
+        </span>
       </ClearableInput>
     </Input>
     <a

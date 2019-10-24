@@ -32,11 +32,15 @@ exports[`renders ./components/auto-complete/demo/basic.md correctly 1`] = `
             <div
               class="ant-select-search__field__wrap"
             >
-              <input
-                class="ant-input ant-select-search__field"
-                type="text"
-                value=""
-              />
+              <span
+                class="ant-select-search__field ant-input-affix-wrapper"
+              >
+                <input
+                  class="ant-input"
+                  type="text"
+                  value=""
+                />
+              </span>
               <span
                 class="ant-select-search__field__mirror"
               >
@@ -105,11 +109,15 @@ exports[`renders ./components/auto-complete/demo/basic.md correctly 1`] = `
             <div
               class="ant-select-search__field__wrap"
             >
-              <input
-                class="ant-input ant-select-search__field"
-                type="text"
-                value=""
-              />
+              <span
+                class="ant-select-search__field ant-input-affix-wrapper"
+              >
+                <input
+                  class="ant-input"
+                  type="text"
+                  value=""
+                />
+              </span>
               <span
                 class="ant-select-search__field__mirror"
               >
@@ -280,8 +288,7 @@ exports[`renders ./components/auto-complete/demo/custom.md correctly 1`] = `
             class="ant-select-search__field__wrap"
           >
             <span
-              class="custom ant-select-search__field ant-input-affix-wrapper"
-              style="height:50px"
+              class="ant-input-affix-wrapper"
             >
               <textarea
                 class="ant-input custom ant-select-search__field"
@@ -357,11 +364,15 @@ exports[`renders ./components/auto-complete/demo/non-case-sensitive.md correctly
           <div
             class="ant-select-search__field__wrap"
           >
-            <input
-              class="ant-input ant-select-search__field"
-              type="text"
-              value=""
-            />
+            <span
+              class="ant-select-search__field ant-input-affix-wrapper"
+            >
+              <input
+                class="ant-input"
+                type="text"
+                value=""
+              />
+            </span>
             <span
               class="ant-select-search__field__mirror"
             >
@@ -431,11 +442,15 @@ exports[`renders ./components/auto-complete/demo/options.md correctly 1`] = `
           <div
             class="ant-select-search__field__wrap"
           >
-            <input
-              class="ant-input ant-select-search__field"
-              type="text"
-              value=""
-            />
+            <span
+              class="ant-select-search__field ant-input-affix-wrapper"
+            >
+              <input
+                class="ant-input"
+                type="text"
+                value=""
+              />
+            </span>
             <span
               class="ant-select-search__field__mirror"
             >

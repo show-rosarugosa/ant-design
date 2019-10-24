@@ -179,11 +179,15 @@ exports[`ConfigProvider components AutoComplete configProvider 1`] = `
           <div
             class="config-select-search__field__wrap"
           >
-            <input
-              class="config-input config-select-search__field"
-              type="text"
-              value=""
-            />
+            <span
+              class="config-select-search__field config-input-affix-wrapper"
+            >
+              <input
+                class="config-input"
+                type="text"
+                value=""
+              />
+            </span>
             <span
               class="config-select-search__field__mirror"
             >
@@ -245,11 +249,15 @@ exports[`ConfigProvider components AutoComplete normal 1`] = `
           <div
             class="ant-select-search__field__wrap"
           >
-            <input
-              class="ant-input ant-select-search__field"
-              type="text"
-              value=""
-            />
+            <span
+              class="ant-select-search__field ant-input-affix-wrapper"
+            >
+              <input
+                class="ant-input"
+                type="text"
+                value=""
+              />
+            </span>
             <span
               class="ant-select-search__field__mirror"
             >
@@ -311,11 +319,15 @@ exports[`ConfigProvider components AutoComplete prefixCls 1`] = `
           <div
             class="prefix-AutoComplete-search__field__wrap"
           >
-            <input
-              class="ant-input prefix-AutoComplete-search__field"
-              type="text"
-              value=""
-            />
+            <span
+              class="prefix-AutoComplete-search__field ant-input-affix-wrapper"
+            >
+              <input
+                class="ant-input"
+                type="text"
+                value=""
+              />
+            </span>
             <span
               class="prefix-AutoComplete-search__field__mirror"
             >
@@ -5810,14 +5822,18 @@ exports[`ConfigProvider components Cascader configProvider 1`] = `
   <span
     class="config-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="config-input config-cascader-input "
-    placeholder="Please select"
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="config-cascader-input  config-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="config-input"
+      placeholder="Please select"
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down config-cascader-picker-arrow"
@@ -5848,14 +5864,18 @@ exports[`ConfigProvider components Cascader normal 1`] = `
   <span
     class="ant-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    placeholder="Please select"
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down ant-cascader-picker-arrow"
@@ -5886,14 +5906,18 @@ exports[`ConfigProvider components Cascader prefixCls 1`] = `
   <span
     class="prefix-Cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input prefix-Cascader-input "
-    placeholder="Please select"
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="prefix-Cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down prefix-Cascader-picker-arrow"
@@ -7084,11 +7108,15 @@ exports[`ConfigProvider components Form configProvider 1`] = `
         <span
           class="config-form-item-children"
         >
-          <input
-            class="config-input"
-            type="text"
-            value=""
-          />
+          <span
+            class="config-input-affix-wrapper"
+          >
+            <input
+              class="config-input"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
         <div
           class="config-form-explain"
@@ -7117,11 +7145,15 @@ exports[`ConfigProvider components Form normal 1`] = `
         <span
           class="ant-form-item-children"
         >
-          <input
-            class="ant-input"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
         <div
           class="ant-form-explain"
@@ -7150,11 +7182,15 @@ exports[`ConfigProvider components Form prefixCls 1`] = `
         <span
           class="prefix-Form-item-children"
         >
-          <input
-            class="prefix-Form"
-            type="text"
-            value=""
-          />
+          <span
+            class="prefix-Form-affix-wrapper"
+          >
+            <input
+              class="prefix-Form"
+              type="text"
+              value=""
+            />
+          </span>
         </span>
         <div
           class="prefix-Form-explain"
@@ -7202,11 +7238,15 @@ exports[`ConfigProvider components Input configProvider 1`] = `
   <span
     class="config-input-group"
   >
-    <input
-      class="config-input"
-      type="text"
-      value=""
-    />
+    <span
+      class="config-input-affix-wrapper"
+    >
+      <input
+        class="config-input"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="config-input-search config-input-affix-wrapper"
     >
@@ -7256,11 +7296,15 @@ exports[`ConfigProvider components Input normal 1`] = `
   <span
     class="ant-input-group"
   >
-    <input
-      class="ant-input"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-input-affix-wrapper"
+    >
+      <input
+        class="ant-input"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="ant-input-search ant-input-affix-wrapper"
     >
@@ -7310,11 +7354,15 @@ exports[`ConfigProvider components Input prefixCls 1`] = `
   <span
     class="prefix-Input"
   >
-    <input
-      class="prefix-Input"
-      type="text"
-      value=""
-    />
+    <span
+      class="prefix-Input-affix-wrapper"
+    >
+      <input
+        class="prefix-Input"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="prefix-Input ant-input-affix-wrapper"
     >
@@ -7422,14 +7470,14 @@ exports[`ConfigProvider components InputNumber configProvider 1`] = `
     </span>
   </div>
   <div
+    aria-valuemin="-9007199254740991"
     class="config-input-number-input-wrap"
+    role="spinbutton"
   >
     <input
-      aria-valuemin="-9007199254740991"
       autocomplete="off"
       class="config-input-number-input"
       min="-9007199254740991"
-      role="spinbutton"
       step="1"
       value=""
     />
@@ -7500,14 +7548,14 @@ exports[`ConfigProvider components InputNumber normal 1`] = `
     </span>
   </div>
   <div
+    aria-valuemin="-9007199254740991"
     class="ant-input-number-input-wrap"
+    role="spinbutton"
   >
     <input
-      aria-valuemin="-9007199254740991"
       autocomplete="off"
       class="ant-input-number-input"
       min="-9007199254740991"
-      role="spinbutton"
       step="1"
       value=""
     />
@@ -7578,14 +7626,14 @@ exports[`ConfigProvider components InputNumber prefixCls 1`] = `
     </span>
   </div>
   <div
+    aria-valuemin="-9007199254740991"
     class="prefix-InputNumber-input-wrap"
+    role="spinbutton"
   >
     <input
-      aria-valuemin="-9007199254740991"
       autocomplete="off"
       class="prefix-InputNumber-input"
       min="-9007199254740991"
-      role="spinbutton"
       step="1"
       value=""
     />

@@ -8,8 +8,9 @@ import Search from './Search';
 import TextArea from './TextArea';
 import Password from './Password';
 import { Omit, tuple } from '../_util/type';
-import ClearableInput from './ClearableInput';
+import ClearableInput, { hasPrefixSuffix } from './ClearableInput';
 import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
+import warning from '../_util/warning';
 
 export const InputSizes = tuple('small', 'default', 'large');
 
@@ -64,6 +65,30 @@ class Input extends React.Component<InputProps, any> {
 
   clearableInput: ClearableInput;
 
+  static getDerivedStateFromProps(nextProps: InputProps) {
+    if ('value' in nextProps) {
+      return {
+        value: nextProps.value,
+      };
+    }
+    return null;
+  }
+
+  // Since polyfill `getSnapshotBeforeUpdate` need work with `componentDidUpdate`.
+  // We keep an empty function here.
+  componentDidUpdate() {}
+
+  getSnapshotBeforeUpdate(prevProps: InputProps) {
+    if (hasPrefixSuffix(prevProps) !== hasPrefixSuffix(this.props)) {
+      warning(
+        this.input !== document.activeElement,
+        'Input',
+        `When Input is focused, dynamic add or remove prefix / suffix will make it lose focus caused by dom structure change. Read more: https://ant.design/components/input/#FAQ`,
+      );
+    }
+    return null;
+  }
+
   focus() {
     this.input.focus();
   }
@@ -81,7 +106,6 @@ class Input extends React.Component<InputProps, any> {
   };
 
   saveInput = (input: HTMLInputElement) => {
-    console.log(input, 'dsaaaaaaaaaaaaa');
     this.input = input;
   };
 
@@ -93,6 +117,12 @@ class Input extends React.Component<InputProps, any> {
       [`${prefixCls}-disabled`]: disabled,
     });
   }
+
+  handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    this.clearableInput.setValue('', this.input, e, () => {
+      this.focus();
+    });
+  };
 
   renderInput = (prefixCls: string) => {
     const { className, addonBefore, addonAfter } = this.props;
@@ -127,7 +157,7 @@ class Input extends React.Component<InputProps, any> {
   };
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.clearableInput.setValue(e.target.value, e);
+    this.clearableInput.setValue(e.target.value, this.input, e);
   };
 
   handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -140,18 +170,26 @@ class Input extends React.Component<InputProps, any> {
     }
   };
 
-  getRef = () => {
-    return this.input;
-  };
-
   renderComponent = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { value, defaultValue, disabled, className, onChange, suffix, allowClear } = this.props;
+    const {
+      value,
+      size,
+      prefix,
+      addonAfter,
+      addonBefore,
+      defaultValue,
+      disabled,
+      className,
+      onChange,
+      suffix,
+      allowClear,
+    } = this.props;
     const { prefixCls: customizePrefixCls } = this.props;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     return (
       <ClearableInput
         prefixCls={prefixCls}
-        inputType="text"
+        inputType="input"
         suffix={suffix}
         value={value}
         defaultValue={defaultValue}
@@ -160,9 +198,13 @@ class Input extends React.Component<InputProps, any> {
         onChange={onChange}
         disabled={disabled}
         className={className}
+        size={size}
+        prefix={prefix}
+        addonBefore={addonBefore}
+        addonAfter={addonAfter}
         ref={this.saveClearableInput}
         focus={this.focus}
-        getRef={this.getRef}
+        handleReset={this.handleReset}
       />
     );
   };

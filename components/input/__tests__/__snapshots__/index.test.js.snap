@@ -7,8 +7,18 @@ exports[`Input allowClear should change type when click 1`] = `
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <input
+        className="ant-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    type="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
@@ -78,8 +88,18 @@ exports[`Input allowClear should change type when click 2`] = `
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <input
+        className="ant-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    type="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
@@ -109,8 +129,18 @@ exports[`Input allowClear should not show icon if defaultValue is undefined, nul
   <ClearableInput
     allowClear={true}
     defaultValue={null}
+    element={
+      <input
+        className="ant-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    type="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
@@ -138,8 +168,18 @@ exports[`Input allowClear should not show icon if defaultValue is undefined, nul
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <input
+        className="ant-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    type="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
@@ -169,8 +209,18 @@ exports[`Input allowClear should not show icon if defaultValue is undefined, nul
   <ClearableInput
     allowClear={true}
     defaultValue=""
+    element={
+      <input
+        className="ant-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    type="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
@@ -199,8 +249,19 @@ exports[`Input allowClear should not show icon if value is undefined, null or em
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <input
+        className="ant-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+        value={null}
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    type="text"
+    prefixCls="ant-input"
     value={null}
   >
     <span
@@ -229,8 +290,18 @@ exports[`Input allowClear should not show icon if value is undefined, null or em
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <input
+        className="ant-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    type="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
@@ -259,8 +330,19 @@ exports[`Input allowClear should not show icon if value is undefined, null or em
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <input
+        className="ant-input"
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+        value=""
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    type="text"
+    prefixCls="ant-input"
     value=""
   >
     <span
@@ -288,18 +370,33 @@ exports[`Input should support maxLength 1`] = `
   type="text"
 >
   <ClearableInput
+    element={
+      <input
+        className="ant-input"
+        maxLength={3}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        type="text"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="input"
-    maxLength={3}
-    type="text"
+    prefixCls="ant-input"
   >
-    <input
-      className="ant-input"
-      maxLength={3}
-      onChange={[Function]}
-      onKeyDown={[Function]}
-      type="text"
-      value=""
-    />
+    <span
+      className="ant-input-affix-wrapper"
+    >
+      <input
+        className="ant-input"
+        maxLength={3}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        style={null}
+        type="text"
+        value=""
+      />
+    </span>
   </ClearableInput>
 </Input>
 `;
@@ -328,9 +425,18 @@ exports[`Input.Search should support suffix 1`] = `
   >
     <ClearableInput
       className="ant-input-search"
+      element={
+        <input
+          className="ant-input ant-input-search"
+          onChange={[Function]}
+          onKeyDown={[Function]}
+          type="text"
+        />
+      }
+      focus={[Function]}
+      handleReset={[Function]}
       inputType="input"
       onChange={[Function]}
-      onPressEnter={[Function]}
       prefixCls="ant-input"
       suffix={
         Array [
@@ -342,7 +448,6 @@ exports[`Input.Search should support suffix 1`] = `
           />,
         ]
       }
-      type="text"
     >
       <span
         className="ant-input-search ant-input-affix-wrapper"
@@ -410,14 +515,24 @@ exports[`TextArea allowClear should change type when click 1`] = `
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <ResizableTextArea
+        allowClear={true}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
     >
       <ResizableTextArea
         allowClear={true}
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -489,14 +604,24 @@ exports[`TextArea allowClear should change type when click 2`] = `
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <ResizableTextArea
+        allowClear={true}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
     >
       <ResizableTextArea
         allowClear={true}
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -529,7 +654,19 @@ exports[`TextArea allowClear should not show icon if defaultValue is undefined, 
   <ClearableInput
     allowClear={true}
     defaultValue={null}
+    element={
+      <ResizableTextArea
+        allowClear={true}
+        defaultValue={null}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
@@ -537,7 +674,6 @@ exports[`TextArea allowClear should not show icon if defaultValue is undefined, 
       <ResizableTextArea
         allowClear={true}
         defaultValue={null}
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -568,14 +704,24 @@ exports[`TextArea allowClear should not show icon if defaultValue is undefined, 
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <ResizableTextArea
+        allowClear={true}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
     >
       <ResizableTextArea
         allowClear={true}
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -608,7 +754,19 @@ exports[`TextArea allowClear should not show icon if defaultValue is undefined, 
   <ClearableInput
     allowClear={true}
     defaultValue=""
+    element={
+      <ResizableTextArea
+        allowClear={true}
+        defaultValue=""
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
@@ -616,7 +774,6 @@ exports[`TextArea allowClear should not show icon if defaultValue is undefined, 
       <ResizableTextArea
         allowClear={true}
         defaultValue=""
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -648,7 +805,19 @@ exports[`TextArea allowClear should not show icon if value is undefined, null or
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <ResizableTextArea
+        allowClear={true}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+        value={null}
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
     value={null}
   >
     <span
@@ -656,7 +825,6 @@ exports[`TextArea allowClear should not show icon if value is undefined, null or
     >
       <ResizableTextArea
         allowClear={true}
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -687,14 +855,24 @@ exports[`TextArea allowClear should not show icon if value is undefined, null or
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <ResizableTextArea
+        allowClear={true}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
     >
       <ResizableTextArea
         allowClear={true}
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -726,7 +904,19 @@ exports[`TextArea allowClear should not show icon if value is undefined, null or
 >
   <ClearableInput
     allowClear={true}
+    element={
+      <ResizableTextArea
+        allowClear={true}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+        value=""
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
     value=""
   >
     <span
@@ -734,7 +924,6 @@ exports[`TextArea allowClear should not show icon if value is undefined, null or
     >
       <ResizableTextArea
         allowClear={true}
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -765,14 +954,24 @@ exports[`TextArea should support disabled 1`] = `
 >
   <ClearableInput
     disabled={true}
+    element={
+      <ResizableTextArea
+        disabled={true}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
     >
       <ResizableTextArea
         disabled={true}
-        inputType="text"
         onChange={[Function]}
         onKeyDown={[Function]}
         prefixCls="ant-input"
@@ -803,14 +1002,23 @@ exports[`TextArea should support maxLength 1`] = `
   maxLength={10}
 >
   <ClearableInput
+    element={
+      <ResizableTextArea
+        maxLength={10}
+        onChange={[Function]}
+        onKeyDown={[Function]}
+        prefixCls="ant-input"
+      />
+    }
+    focus={[Function]}
+    handleReset={[Function]}
     inputType="text"
-    maxLength={10}
+    prefixCls="ant-input"
   >
     <span
       className="ant-input-affix-wrapper"
     >
       <ResizableTextArea
-        inputType="text"
         maxLength={10}
         onChange={[Function]}
         onKeyDown={[Function]}

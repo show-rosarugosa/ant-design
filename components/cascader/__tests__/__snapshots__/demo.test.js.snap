@@ -8,15 +8,19 @@ exports[`renders ./components/cascader/demo/basic.md correctly 1`] = `
   <span
     class="ant-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    placeholder="Please select"
-    readonly=""
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      readonly=""
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down ant-cascader-picker-arrow"
@@ -47,15 +51,19 @@ exports[`renders ./components/cascader/demo/change-on-select.md correctly 1`] = 
   <span
     class="ant-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    placeholder="Please select"
-    readonly=""
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      readonly=""
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down ant-cascader-picker-arrow"
@@ -101,14 +109,18 @@ exports[`renders ./components/cascader/demo/custom-render.md correctly 1`] = `
       )
     </span>
   </span>
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    readonly=""
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      readonly=""
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: close-circle"
     class="anticon anticon-close-circle ant-cascader-picker-clear"
@@ -173,14 +185,18 @@ exports[`renders ./components/cascader/demo/default-value.md correctly 1`] = `
   >
     Zhejiang / Hangzhou / West Lake
   </span>
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    readonly=""
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      readonly=""
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: close-circle"
     class="anticon anticon-close-circle ant-cascader-picker-clear"
@@ -231,15 +247,19 @@ exports[`renders ./components/cascader/demo/disabled-option.md correctly 1`] = `
   <span
     class="ant-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    placeholder="Please select"
-    readonly=""
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      readonly=""
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down ant-cascader-picker-arrow"
@@ -270,15 +290,19 @@ exports[`renders ./components/cascader/demo/fields-name.md correctly 1`] = `
   <span
     class="ant-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    placeholder="Please select"
-    readonly=""
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      readonly=""
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down ant-cascader-picker-arrow"
@@ -309,15 +333,19 @@ exports[`renders ./components/cascader/demo/hover.md correctly 1`] = `
   <span
     class="ant-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    placeholder="Please select"
-    readonly=""
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      readonly=""
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down ant-cascader-picker-arrow"
@@ -348,15 +376,19 @@ exports[`renders ./components/cascader/demo/lazy.md correctly 1`] = `
   <span
     class="ant-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    placeholder="Please select"
-    readonly=""
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      readonly=""
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down ant-cascader-picker-arrow"
@@ -387,14 +419,18 @@ exports[`renders ./components/cascader/demo/search.md correctly 1`] = `
   <span
     class="ant-cascader-picker-label"
   />
-  <input
-    autocomplete="off"
-    class="ant-input ant-cascader-input "
-    placeholder="Please select"
-    tabindex="-1"
-    type="text"
-    value=""
-  />
+  <span
+    class="ant-cascader-input  ant-input-affix-wrapper"
+  >
+    <input
+      autocomplete="off"
+      class="ant-input"
+      placeholder="Please select"
+      tabindex="-1"
+      type="text"
+      value=""
+    />
+  </span>
   <i
     aria-label="icon: down"
     class="anticon anticon-down ant-cascader-picker-arrow"
@@ -426,15 +462,19 @@ exports[`renders ./components/cascader/demo/size.md correctly 1`] = `
     <span
       class="ant-cascader-picker-label"
     />
-    <input
-      autocomplete="off"
-      class="ant-input ant-cascader-input ant-input-lg"
-      placeholder="Please select"
-      readonly=""
-      tabindex="-1"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-cascader-input ant-input-lg ant-input-affix-wrapper"
+    >
+      <input
+        autocomplete="off"
+        class="ant-input"
+        placeholder="Please select"
+        readonly=""
+        tabindex="-1"
+        type="text"
+        value=""
+      />
+    </span>
     <i
       aria-label="icon: down"
       class="anticon anticon-down ant-cascader-picker-arrow"
@@ -464,15 +504,19 @@ exports[`renders ./components/cascader/demo/size.md correctly 1`] = `
     <span
       class="ant-cascader-picker-label"
     />
-    <input
-      autocomplete="off"
-      class="ant-input ant-cascader-input "
-      placeholder="Please select"
-      readonly=""
-      tabindex="-1"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-cascader-input  ant-input-affix-wrapper"
+    >
+      <input
+        autocomplete="off"
+        class="ant-input"
+        placeholder="Please select"
+        readonly=""
+        tabindex="-1"
+        type="text"
+        value=""
+      />
+    </span>
     <i
       aria-label="icon: down"
       class="anticon anticon-down ant-cascader-picker-arrow"
@@ -502,15 +546,19 @@ exports[`renders ./components/cascader/demo/size.md correctly 1`] = `
     <span
       class="ant-cascader-picker-label"
     />
-    <input
-      autocomplete="off"
-      class="ant-input ant-cascader-input ant-input-sm"
-      placeholder="Please select"
-      readonly=""
-      tabindex="-1"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-cascader-input ant-input-sm ant-input-affix-wrapper"
+    >
+      <input
+        autocomplete="off"
+        class="ant-input"
+        placeholder="Please select"
+        readonly=""
+        tabindex="-1"
+        type="text"
+        value=""
+      />
+    </span>
     <i
       aria-label="icon: down"
       class="anticon anticon-down ant-cascader-picker-arrow"
@@ -545,15 +593,19 @@ exports[`renders ./components/cascader/demo/suffix.md correctly 1`] = `
     <span
       class="ant-cascader-picker-label"
     />
-    <input
-      autocomplete="off"
-      class="ant-input ant-cascader-input "
-      placeholder="Please select"
-      readonly=""
-      tabindex="-1"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-cascader-input  ant-input-affix-wrapper"
+    >
+      <input
+        autocomplete="off"
+        class="ant-input"
+        placeholder="Please select"
+        readonly=""
+        tabindex="-1"
+        type="text"
+        value=""
+      />
+    </span>
     <i
       aria-label="icon: smile"
       class="anticon anticon-smile ant-cascader-picker-arrow"
@@ -582,15 +634,19 @@ exports[`renders ./components/cascader/demo/suffix.md correctly 1`] = `
     <span
       class="ant-cascader-picker-label"
     />
-    <input
-      autocomplete="off"
-      class="ant-input ant-cascader-input "
-      placeholder="Please select"
-      readonly=""
-      tabindex="-1"
-      type="text"
-      value=""
-    />
+    <span
+      class="ant-cascader-input  ant-input-affix-wrapper"
+    >
+      <input
+        autocomplete="off"
+        class="ant-input"
+        placeholder="Please select"
+        readonly=""
+        tabindex="-1"
+        type="text"
+        value=""
+      />
+    </span>
     <span
       class="ant-cascader-picker-arrow"
     >

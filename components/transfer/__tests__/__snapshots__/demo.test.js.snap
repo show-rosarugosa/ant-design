@@ -44,12 +44,16 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
         class="ant-transfer-list-body-search-wrapper"
       >
         <div>
-          <input
-            class="ant-input ant-transfer-list-search"
-            placeholder="Search here"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-transfer-list-search ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              placeholder="Search here"
+              type="text"
+              value=""
+            />
+          </span>
           <span
             class="ant-transfer-list-search-action"
           >
@@ -239,12 +243,16 @@ exports[`renders ./components/transfer/demo/advanced.md correctly 1`] = `
         class="ant-transfer-list-body-search-wrapper"
       >
         <div>
-          <input
-            class="ant-input ant-transfer-list-search"
-            placeholder="Search here"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-transfer-list-search ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              placeholder="Search here"
+              type="text"
+              value=""
+            />
+          </span>
           <span
             class="ant-transfer-list-search-action"
           >
@@ -1090,12 +1098,16 @@ exports[`renders ./components/transfer/demo/search.md correctly 1`] = `
         class="ant-transfer-list-body-search-wrapper"
       >
         <div>
-          <input
-            class="ant-input ant-transfer-list-search"
-            placeholder="Search here"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-transfer-list-search ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              placeholder="Search here"
+              type="text"
+              value=""
+            />
+          </span>
           <span
             class="ant-transfer-list-search-action"
           >
@@ -1265,12 +1277,16 @@ exports[`renders ./components/transfer/demo/search.md correctly 1`] = `
         class="ant-transfer-list-body-search-wrapper"
       >
         <div>
-          <input
-            class="ant-input ant-transfer-list-search"
-            placeholder="Search here"
-            type="text"
-            value=""
-          />
+          <span
+            class="ant-transfer-list-search ant-input-affix-wrapper"
+          >
+            <input
+              class="ant-input"
+              placeholder="Search here"
+              type="text"
+              value=""
+            />
+          </span>
           <span
             class="ant-transfer-list-search-action"
           >

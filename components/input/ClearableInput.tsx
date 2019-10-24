@@ -27,7 +27,7 @@ interface ClearableInputProps {
   defaultValue?: any;
   allowClear?: boolean;
   element: React.ReactElement<any>;
-  getRef: Function;
+  handleReset: any;
   onChange?: Function;
   resizeTextarea?: Function;
   disabled?: boolean;
@@ -53,6 +53,8 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
     };
   }
 
+  input: HTMLTextAreaElement | HTMLInputElement;
+
   static getDerivedStateFromProps(nextProps: InputProps | TextAreaProps) {
     if ('value' in nextProps) {
       return {
@@ -64,45 +66,35 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
 
   setValue(
     value: string,
+    target: HTMLInputElement | HTMLTextAreaElement,
     e:
       | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
       | React.MouseEvent<HTMLElement, MouseEvent>,
     callback?: () => void,
   ) {
     this.setState({ currentValue: value }, callback);
-    const { onChange, getRef } = this.props;
-    console.log('target');
+    const { onChange } = this.props;
     if (onChange) {
       let event = e;
       if (e.type === 'click') {
         // click clear icon
         event = Object.create(e);
-        event.target = getRef();
-        event.currentTarget = getRef();
-        const originalInputValue = getRef().value;
+        event.target = target;
+        event.currentTarget = target;
+        const originalInputValue = target.value;
         // change target ref value cause e.target.value should be '' when clear input
-        getRef().value = '';
+        target.value = '';
         onChange(event);
         // reset target ref value
-        getRef().value = originalInputValue;
+        target.value = originalInputValue;
         return;
       }
       onChange(event);
     }
   }
 
-  handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const { inputType, focus, resizeTextarea } = this.props;
-    this.setValue('', e, () => {
-      if (inputType === ClearableInputType[0] && resizeTextarea) {
-        resizeTextarea();
-      }
-      focus();
-    });
-  };
-
   renderClearIcon(prefixCls: string) {
-    const { allowClear, disabled, inputType } = this.props;
+    const { allowClear, disabled, inputType, handleReset } = this.props;
     const { currentValue } = this.state;
     if (
       !allowClear ||
@@ -121,7 +113,7 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
       <Icon
         type="close-circle"
         theme="filled"
-        onClick={this.handleReset}
+        onClick={handleReset}
         className={className}
         role="button"
       />
@@ -139,7 +131,6 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
   renderSuffix(prefixCls: string) {
     const { suffix, allowClear } = this.props;
     if (suffix || allowClear) {
-      console.log('fuckyea');
       return (
         <span className={`${prefixCls}-suffix`}>
           {this.renderClearIcon(prefixCls)}
@@ -238,7 +229,7 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
           style: null,
           value: currentValue,
         })}
-        {this.renderSuffix(prefixCls)}
+        {this.renderClearIcon(prefixCls)}
       </span>
     );
   }
