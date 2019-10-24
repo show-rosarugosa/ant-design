@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { polyfill } from 'react-lifecycles-compat';
 import ClearableInput from './ClearableInput';
-import { AutoSizeType } from './ResizableTextArea';
+import ResizableTextArea, { AutoSizeType } from './ResizableTextArea';
 
 export type HTMLTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
@@ -14,24 +14,57 @@ export interface TextAreaProps extends HTMLTextareaProps {
   allowClear?: boolean;
 }
 
-class TextArea extends React.Component {
-  textArea: HTMLTextAreaElement;
+class TextArea extends React.Component<TextAreaProps> {
+  resizableTextArea: ResizableTextArea;
+
+  clearableInput: ClearableInput;
 
   focus() {
-    this.textArea.focus();
+    this.resizableTextArea.textArea.focus();
   }
 
   blur() {
-    this.textArea.blur();
+    this.resizableTextArea.textArea.blur();
   }
 
-  saveTextArea = (input: ClearableInput) => {
-    this.textArea = input.textAreaElement as HTMLTextAreaElement;
+  saveTextArea = (input: ResizableTextArea) => {
+    this.resizableTextArea = input;
   };
 
-  renderTextArea = () => {
+  saveClearableInput = (input: ClearableInput) => {
+    this.clearableInput = input;
+  };
+
+  handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    this.clearableInput.setValue(e.target.value, e, () => {
+      this.resizableTextArea.resizeTextarea();
+    });
+  };
+
+  handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const { onPressEnter, onKeyDown } = this.props;
+    if (e.keyCode === 13 && onPressEnter) {
+      onPressEnter(e);
+    }
+    if (onKeyDown) {
+      onKeyDown(e);
+    }
+  };
+
+  renderTextArea = (prefixCls: string) => {
     const { props } = this;
-    return <ClearableInput inputType="text" {...props} ref={this.saveTextArea} />;
+    return (
+      <ClearableInput prefixCls={} inputType={} target={}>
+        <ResizableTextArea
+          {...(props as TextAreaProps)}
+          prefixCls={prefixCls}
+          value={fixControlledValue(value)}
+          onKeyDown={this.handleKeyDown}
+          onChange={this.handleChange}
+          ref={this.saveTextArea}
+        />
+      </ClearableInput>
+    );
   };
 
   render() {
