@@ -60,21 +60,6 @@ class Input extends React.Component<InputProps, any> {
 
   input: HTMLInputElement;
 
-  // Since polyfill `getSnapshotBeforeUpdate` need work with `componentDidUpdate`.
-  // We keep an empty function here.
-  componentDidUpdate() {}
-
-  getSnapshotBeforeUpdate(prevProps: InputProps) {
-    if (hasPrefixSuffix(prevProps) !== hasPrefixSuffix(this.props)) {
-      warning(
-        this.input !== document.activeElement,
-        'Input',
-        `When Input is focused, dynamic add or remove prefix / suffix will make it lose focus caused by dom structure change. Read more: https://ant.design/components/input/#FAQ`,
-      );
-    }
-    return null;
-  }
-
   focus() {
     this.input.focus();
   }
@@ -88,12 +73,14 @@ class Input extends React.Component<InputProps, any> {
   }
 
   saveInput = (input: ClearableInput) => {
-    this.input = input.inputElement as HTMLInputElement;
+    if (input && input.inputElement) {
+      this.input = input.inputElement as HTMLInputElement;
+    }
   };
 
   renderInput = () => {
     const { props } = this;
-    return <ClearableInput {...props} type="input" ref={this.saveInput} />;
+    return <ClearableInput {...props} inputType="input" ref={this.saveInput} />;
   };
 
   render() {

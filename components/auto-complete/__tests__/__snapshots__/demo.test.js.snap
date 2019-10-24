@@ -286,7 +286,6 @@ exports[`renders ./components/auto-complete/demo/custom.md correctly 1`] = `
               <textarea
                 class="ant-input custom ant-select-search__field"
                 placeholder="input here"
-                style="height:50px"
               />
             </span>
             <span

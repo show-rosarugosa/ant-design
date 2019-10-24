@@ -7,6 +7,7 @@ import { ConfigConsumer, ConfigConsumerProps } from '../config-provider';
 import { tuple } from '../_util/type';
 import { InputProps } from './Input';
 import { TextAreaProps } from './TextArea';
+import ResizableTextArea from './ResizableTextArea';
 
 const ClearableInputType = tuple('text', 'input');
 
@@ -21,15 +22,12 @@ function fixControlledValue<T>(value: T) {
   return value;
 }
 
-interface ClearableInputTextAreaProps extends TextAreaProps {
-  textareaStyles?: React.CSSProperties;
-  resizeTextarea: Function;
-  resizing?: boolean;
-  type: (typeof ClearableInputType)[number];
+interface ClearableTextAreaProps extends TextAreaProps {
+  inputType: (typeof ClearableInputType)[number];
 }
 
 interface ClearableInputProps extends InputProps {
-  type: (typeof ClearableInputType)[number];
+  inputType: (typeof ClearableInputType)[number];
 }
 
 export interface ClearableInputState {
@@ -37,12 +35,16 @@ export interface ClearableInputState {
 }
 
 class ClearableInput extends React.Component<
-  ClearableInputTextAreaProps | ClearableInputProps,
+  ClearableTextAreaProps | ClearableInputProps,
   ClearableInputState
 > {
-  inputElement: HTMLInputElement | HTMLTextAreaElement;
+  inputElement: HTMLInputElement;
 
-  constructor(props: ClearableInputTextAreaProps | ClearableInputProps) {
+  textAreaElement: HTMLTextAreaElement;
+
+  resizableTextArea: ResizableTextArea;
+
+  constructor(props: ClearableTextAreaProps | ClearableInputProps) {
     super(props);
     const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
     this.state = {
@@ -63,78 +65,79 @@ class ClearableInput extends React.Component<
     this.inputElement = inputElement;
   };
 
-  saveTextAreaElementRef = (inputElement: HTMLTextAreaElement) => {
-    this.inputElement = inputElement;
+  saveTextAreaElementRef = (textArea: ResizableTextArea) => {
+    this.resizableTextArea = textArea;
+    this.textAreaElement = textArea.textArea;
   };
 
-  handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    const callback =
-      this.props.type === ClearableInputType[0]
-        ? () => {
-            (this.props as ClearableInputTextAreaProps).resizeTextarea();
-          }
-        : () => {};
-    this.setValue(e.target.value, e, callback);
+  handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const { inputType } = this.props;
+    if (inputType === ClearableInputType[0]) {
+      this.setValue(e.target.value, this.textAreaElement, e, () => {
+        this.resizableTextArea.resizeTextarea();
+      });
+    } else {
+      this.setValue(e.target.value, this.inputElement, e, () => {});
+    }
+  };
+
+  handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement & HTMLInputElement>) => {
+    const { onPressEnter, onKeyDown } = this.props;
+    if (e.keyCode === 13 && onPressEnter) {
+      onPressEnter(e);
+    }
+    if (onKeyDown) {
+      onKeyDown(e);
+    }
   };
 
   setValue(
     value: string,
+    target: HTMLTextAreaElement | HTMLInputElement,
     e:
       | React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
       | React.MouseEvent<HTMLElement, MouseEvent>,
     callback?: () => void,
   ) {
-    if (!('value' in this.props) || this.props.value === undefined) {
+    if (!('value' in this.props)) {
       this.setState({ value }, callback);
     }
-    const { onChange } = this.props as ClearableInputTextAreaProps;
+    const { onChange } = this.props;
     if (onChange) {
       let event = e;
       if (e.type === 'click') {
         // click clear icon
         event = Object.create(e);
-        event.target = this.inputElement;
-        event.currentTarget = this.inputElement;
-        const originalInputValue = this.inputElement.value;
+        event.target = target;
+        event.currentTarget = target;
+        const originalInputValue = target.value;
         // change target ref value cause e.target.value should be '' when clear input
-        this.inputElement.value = '';
-        onChange(event as React.ChangeEvent<HTMLTextAreaElement>);
+        target.value = '';
+        onChange(event as React.ChangeEvent<HTMLTextAreaElement & HTMLInputElement>);
         // reset target ref value
-        this.inputElement.value = originalInputValue;
+        target.value = originalInputValue;
         return;
       }
-      onChange(event as React.ChangeEvent<HTMLTextAreaElement>);
+      onChange(event as React.ChangeEvent<HTMLTextAreaElement & HTMLInputElement>);
     }
   }
 
-  getInputClassName(prefixCls: string) {
-    const { size, disabled } = this.props as ClearableInputProps;
-    return classNames(prefixCls, {
-      [`${prefixCls}-sm`]: size === 'small',
-      [`${prefixCls}-lg`]: size === 'large',
-      [`${prefixCls}-disabled`]: disabled,
-    });
-  }
-
-  renderTextAreaWithClearIcon(prefixCls: string, children: React.ReactElement<any>) {
-    const { props } = this;
-    const affixWrapperCls = classNames(props.className, `${prefixCls}-affix-wrapper`);
-    return (
-      <span className={affixWrapperCls} style={(props as ClearableInputTextAreaProps).style}>
-        {React.cloneElement(children, {
-          style: null,
-        })}
-        {this.renderClearIcon(prefixCls)}
-      </span>
-    );
-  }
-
   focus() {
-    this.inputElement.focus();
+    const { inputType } = this.props;
+    if (inputType === ClearableInputType[0]) {
+      this.textAreaElement.focus();
+    } else {
+      this.inputElement.focus();
+    }
   }
 
   blur() {
-    this.inputElement.blur();
+    const { inputType } = this.props;
+    if (inputType === ClearableInputType[0]) {
+      this.textAreaElement.focus();
+    } else {
+      this.inputElement.blur();
+    }
   }
 
   select() {
@@ -142,26 +145,27 @@ class ClearableInput extends React.Component<
   }
 
   handleReset = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    const callback =
-      this.props.type === ClearableInputType[0]
-        ? () => {
-            (this.props as ClearableInputTextAreaProps).resizeTextarea();
-          }
-        : () => {};
-    this.setValue('', e, () => {
-      callback();
-      this.focus();
-    });
+    const { inputType } = this.props;
+    if (inputType === ClearableInputType[0]) {
+      this.setValue('', this.textAreaElement, e, () => {
+        this.resizableTextArea.resizeTextarea();
+        this.focus();
+      });
+    } else {
+      this.setValue('', this.inputElement, e, () => {
+        this.focus();
+      });
+    }
   };
 
   renderClearIcon(prefixCls: string) {
-    const { allowClear, disabled, type } = this.props;
+    const { allowClear, disabled, inputType } = this.props;
     const { value } = this.state;
     if (!allowClear || disabled || value === undefined || value === null || value === '') {
       return null;
     }
     const className =
-      type === ClearableInputType[0]
+      inputType === ClearableInputType[0]
         ? `${prefixCls}-textarea-clear-icon`
         : `${prefixCls}-clear-icon`;
     return (
@@ -175,15 +179,42 @@ class ClearableInput extends React.Component<
     );
   }
 
-  // handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-  //   const { onPressEnter, onKeyDown } = this.props as ClearableInputTextAreaProps;
-  //   if (e.keyCode === 13 && onPressEnter) {
-  //     onPressEnter(e);
-  //   }
-  //   if (onKeyDown) {
-  //     onKeyDown(e);
-  //   }
-  // };
+  renderTextAreaWithClearIcon(prefixCls: string, children: React.ReactElement<any>) {
+    const { props } = this;
+    const affixWrapperCls = classNames(props.className, `${prefixCls}-affix-wrapper`);
+    return (
+      <span className={affixWrapperCls} style={props.style}>
+        {React.cloneElement(children, {
+          style: null,
+        })}
+        {this.renderClearIcon(prefixCls)}
+      </span>
+    );
+  }
+
+  renderTextArea = (prefixCls: string) => {
+    const { value } = this.state;
+    const { props } = this;
+    return (
+      <ResizableTextArea
+        {...(props as TextAreaProps)}
+        prefixCls={prefixCls}
+        value={fixControlledValue(value)}
+        onKeyDown={this.handleKeyDown}
+        onChange={this.handleChange}
+        ref={this.saveTextAreaElementRef}
+      />
+    );
+  };
+
+  getInputClassName(prefixCls: string) {
+    const { size, disabled } = this.props as ClearableInputProps;
+    return classNames(prefixCls, {
+      [`${prefixCls}-sm`]: size === 'small',
+      [`${prefixCls}-lg`]: size === 'large',
+      [`${prefixCls}-disabled`]: disabled,
+    });
+  }
 
   renderSuffix(prefixCls: string) {
     const { suffix, allowClear } = this.props as ClearableInputProps;
@@ -198,7 +229,7 @@ class ClearableInput extends React.Component<
     return null;
   }
 
-  renderLabeledInput(prefixCls: string, children: React.ReactElement<any>) {
+  renderInputWithLabel(prefixCls: string, children: React.ReactElement<any>) {
     const { addonBefore, addonAfter, style, size, className } = this.props as ClearableInputProps;
     // Not wrap when there is not addons
     if (!addonBefore && !addonAfter) {
@@ -264,46 +295,6 @@ class ClearableInput extends React.Component<
     );
   }
 
-  renderTextArea = (prefixCls: string) => {
-    const { value } = this.state;
-    const { className, disabled, textareaStyles, resizing } = this
-      .props as ClearableInputTextAreaProps;
-    const otherProps = omit(this.props, [
-      'prefixCls',
-      'onPressEnter',
-      'autoSize',
-      'autosize',
-      'defaultValue',
-      'allowClear',
-      'textareaStyles',
-      'resizeTextarea',
-      'resizing',
-    ]);
-    const cls = classNames(prefixCls, className, {
-      [`${prefixCls}-disabled`]: disabled,
-    });
-    // Fix https://github.com/ant-design/ant-design/issues/6776
-    // Make sure it could be reset when using form.getFieldDecorator
-    if ('value' in otherProps) {
-      otherProps.value = otherProps.value || '';
-    }
-    const style = {
-      ...this.props.style,
-      ...textareaStyles,
-      ...(resizing ? { overflow: 'hidden' } : null),
-    };
-    return (
-      <textarea
-        {...otherProps}
-        value={fixControlledValue(value)}
-        className={cls}
-        style={style}
-        onChange={this.handleTextareaChange}
-        ref={this.saveTextAreaElementRef}
-      />
-    );
-  };
-
   renderInput = (prefixCls: string) => {
     const { value } = this.state;
     const { className, addonBefore, addonAfter } = this.props as ClearableInputProps;
@@ -322,13 +313,15 @@ class ClearableInput extends React.Component<
       'size',
       'resizeTextarea',
       'resizing',
+      'inputType',
     ]);
     return this.renderLabeledIcon(
       prefixCls,
       <input
         {...otherProps}
         value={fixControlledValue(value)}
-        onChange={this.handleTextareaChange}
+        onChange={this.handleChange}
+        onKeyDown={this.handleKeyDown}
         className={classNames(this.getInputClassName(prefixCls), {
           [className!]: className && !addonBefore && !addonAfter,
         })}
@@ -340,9 +333,9 @@ class ClearableInput extends React.Component<
   renderComponent = ({ getPrefixCls }: ConfigConsumerProps) => {
     const { prefixCls: customizePrefixCls } = this.props;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    return this.props.type === ClearableInputType[0]
+    return this.props.inputType === ClearableInputType[0]
       ? this.renderTextAreaWithClearIcon(prefixCls, this.renderTextArea(prefixCls))
-      : this.renderLabeledInput(prefixCls, this.renderInput(prefixCls));
+      : this.renderInputWithLabel(prefixCls, this.renderInput(prefixCls));
   };
 
   render() {
