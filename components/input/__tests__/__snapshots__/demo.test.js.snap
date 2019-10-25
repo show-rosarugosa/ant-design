@@ -225,6 +225,7 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
   </div>
   <span
     class="ant-input-affix-wrapper"
+    style="width:100px"
   >
     <textarea
       class="ant-input"
@@ -241,6 +242,7 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
   </button>
   <span
     class="ant-input-affix-wrapper"
+    style="width:100px"
   >
     <input
       class="ant-input"
@@ -283,6 +285,7 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
   </span>
   <span
     class="ant-input-affix-wrapper"
+    style="width:100px"
   >
     <span
       class="ant-input-prefix"
@@ -302,6 +305,7 @@ exports[`renders ./components/input/demo/align.md correctly 1`] = `
   </span>
   <span
     class="ant-input-group-wrapper"
+    style="width:100px"
   >
     <span
       class="ant-input-wrapper ant-input-group"
@@ -1001,6 +1005,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
   >
     <span
       class="ant-input-affix-wrapper"
+      style="width:20%"
     >
       <input
         class="ant-input"
@@ -1010,6 +1015,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
     </span>
     <span
       class="ant-input-affix-wrapper"
+      style="width:30%"
     >
       <input
         class="ant-input"
@@ -1075,6 +1081,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
     </div>
     <span
       class="ant-input-affix-wrapper"
+      style="width:50%"
     >
       <input
         class="ant-input"
@@ -1140,6 +1147,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
     </div>
     <span
       class="ant-input-affix-wrapper"
+      style="width:50%"
     >
       <input
         class="ant-input"
@@ -1229,6 +1237,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
   >
     <span
       class="ant-input-affix-wrapper"
+      style="width:50%"
     >
       <input
         class="ant-input"
@@ -1433,6 +1442,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
     </div>
     <span
       class="ant-input-affix-wrapper"
+      style="width:100px;text-align:center"
     >
       <input
         class="ant-input"
@@ -1443,6 +1453,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
     </span>
     <span
       class="ant-input-affix-wrapper"
+      style="width:30px;border-left:0;pointer-events:none;background-color:#fff"
     >
       <input
         class="ant-input ant-input-disabled"
@@ -1454,6 +1465,7 @@ exports[`renders ./components/input/demo/group.md correctly 1`] = `
     </span>
     <span
       class="ant-input-affix-wrapper"
+      style="width:100px;text-align:center;border-left:0"
     >
       <input
         class="ant-input"
@@ -1827,6 +1839,7 @@ exports[`renders ./components/input/demo/search-input.md correctly 1`] = `
 <div>
   <span
     class="ant-input-search ant-input-affix-wrapper"
+    style="width:200px"
   >
     <input
       class="ant-input"
@@ -2103,6 +2116,7 @@ exports[`renders ./components/input/demo/textarea-resize.md correctly 1`] = `
 exports[`renders ./components/input/demo/tooltip.md correctly 1`] = `
 <span
   class="ant-input-affix-wrapper"
+  style="width:120px"
 >
   <input
     class="ant-input"

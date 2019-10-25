@@ -1800,6 +1800,7 @@ exports[`renders ./components/tree/demo/search.md correctly 1`] = `
 <div>
   <span
     class="ant-input-search ant-input-affix-wrapper"
+    style="margin-bottom:8px"
   >
     <input
       class="ant-input"

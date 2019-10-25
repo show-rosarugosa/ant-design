@@ -289,6 +289,7 @@ exports[`renders ./components/auto-complete/demo/custom.md correctly 1`] = `
           >
             <span
               class="ant-input-affix-wrapper"
+              style="height:50px"
             >
               <textarea
                 class="ant-input custom ant-select-search__field"
