@@ -65,15 +65,6 @@ class Input extends React.Component<InputProps, any> {
 
   clearableInput: ClearableInput;
 
-  static getDerivedStateFromProps(nextProps: InputProps) {
-    if ('value' in nextProps) {
-      return {
-        value: nextProps.value,
-      };
-    }
-    return null;
-  }
-
   // Since polyfill `getSnapshotBeforeUpdate` need work with `componentDidUpdate`.
   // We keep an empty function here.
   componentDidUpdate() {}
@@ -183,6 +174,7 @@ class Input extends React.Component<InputProps, any> {
       onChange,
       suffix,
       allowClear,
+      style,
     } = this.props;
     const { prefixCls: customizePrefixCls } = this.props;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
@@ -202,6 +194,7 @@ class Input extends React.Component<InputProps, any> {
         prefix={prefix}
         addonBefore={addonBefore}
         addonAfter={addonAfter}
+        style={style}
         ref={this.saveClearableInput}
         focus={this.focus}
         handleReset={this.handleReset}

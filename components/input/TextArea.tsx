@@ -20,15 +20,6 @@ class TextArea extends React.Component<TextAreaProps> {
 
   clearableInput: ClearableInput;
 
-  static getDerivedStateFromProps(nextProps: TextAreaProps) {
-    if ('value' in nextProps) {
-      return {
-        value: nextProps.value,
-      };
-    }
-    return null;
-  }
-
   focus() {
     this.resizableTextArea.textArea.focus();
   }
@@ -38,7 +29,7 @@ class TextArea extends React.Component<TextAreaProps> {
   }
 
   resizeTextarea() {
-    this.resizableTextArea.renderTextArea();
+    this.resizableTextArea.resizeTextarea();
   }
 
   saveTextArea = (resizableTextArea: ResizableTextArea) => {
@@ -86,7 +77,7 @@ class TextArea extends React.Component<TextAreaProps> {
   };
 
   renderComponent = ({ getPrefixCls }: ConfigConsumerProps) => {
-    const { value, defaultValue, disabled, allowClear } = this.props;
+    const { value, style, defaultValue, disabled, onChange, allowClear } = this.props;
     const { prefixCls: customizePrefixCls } = this.props;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     return (
@@ -97,10 +88,12 @@ class TextArea extends React.Component<TextAreaProps> {
         defaultValue={defaultValue}
         allowClear={allowClear}
         disabled={disabled}
+        onChange={onChange}
         element={this.renderTextArea(prefixCls)}
         ref={this.saveClearableInput}
         focus={this.focus}
         handleReset={this.handleReset}
+        style={style}
       />
     );
   };

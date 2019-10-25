@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import Icon from '../icon';
 import { tuple } from '../_util/type';
 import { InputProps, InputSizes } from './Input';
-import { TextAreaProps } from './TextArea';
 
 const ClearableInputType = tuple('text', 'input');
 
@@ -29,7 +28,6 @@ interface ClearableInputProps {
   element: React.ReactElement<any>;
   handleReset: any;
   onChange?: Function;
-  resizeTextarea?: Function;
   disabled?: boolean;
   className?: string;
   style?: object;
@@ -55,7 +53,7 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
 
   input: HTMLTextAreaElement | HTMLInputElement;
 
-  static getDerivedStateFromProps(nextProps: InputProps | TextAreaProps) {
+  static getDerivedStateFromProps(nextProps: ClearableInputProps) {
     if ('value' in nextProps) {
       return {
         value: nextProps.value,
@@ -72,7 +70,9 @@ class ClearableInput extends React.Component<ClearableInputProps, ClearableInput
       | React.MouseEvent<HTMLElement, MouseEvent>,
     callback?: () => void,
   ) {
-    this.setState({ currentValue: value }, callback);
+    if (!('value' in this.props) || this.props.value === undefined) {
+      this.setState({ currentValue: value }, callback);
+    }
     const { onChange } = this.props;
     if (onChange) {
       let event = e;

@@ -89,7 +89,6 @@ class ResizableTextArea extends React.Component<TextAreaProps, TextAreaState> {
       'autosize',
       'defaultValue',
       'allowClear',
-      'inputType',
     ]);
     const cls = classNames(prefixCls, className, {
       [`${prefixCls}-disabled`]: disabled,
